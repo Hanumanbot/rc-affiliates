@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 /**
- * Simple autoload for PB Affiliates classes.
+ * Simple autoload for rc affiliates classes.
  *
  * @package PB_Affiliates
  */
@@ -41,7 +41,7 @@ $pb_aff_files = array(
 );
 
 foreach ( $pb_aff_files as $file ) {
-	// Classes under plugin root (e.g. public/) — not under includes/.
+	// Classes under plugin root (e.g. public/) â€” not under includes/.
 	if ( 0 === strpos( $file, 'public/', 0 ) ) {
 		$path = PB_AFFILIATES_PATH . $file;
 	} else {
@@ -51,3 +51,4 @@ foreach ( $pb_aff_files as $file ) {
 		require_once $path;
 	}
 }
+
