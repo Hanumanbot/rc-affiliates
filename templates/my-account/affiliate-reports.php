@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 /**
- * Relatórios do afiliado: cliques e pedidos atribuídos.
+ * RelatÃ³rios do afiliado: cliques e pedidos atribuÃ­dos.
  *
- * @package PB_Affiliates
+ * @package RC_Affiliates
  * @var int               $user_id           Current user (affiliate).
  * @var int               $clicks_7d         Clicks last 7 days.
  * @var int               $clicks_30d        Clicks last 30 days.
@@ -25,7 +25,7 @@ $pb_aff_nav_active = isset( $pb_aff_nav_active ) ? (string) $pb_aff_nav_active :
 $pb_aff_materials_url = isset( $pb_aff_materials_url ) ? (string) $pb_aff_materials_url : '';
 $pb_aff_has_promo_materials = ! empty( $pb_aff_has_promo_materials );
 
-include PB_AFFILIATES_PATH . 'templates/my-account/parts/affiliate-hub-nav.php';
+include RC_Affiliates_PATH . 'templates/my-account/parts/affiliate-hub-nav.php';
 
 $recent_hits = isset( $recent_hits ) && is_array( $recent_hits ) ? $recent_hits : array();
 $orders      = isset( $orders ) && is_array( $orders ) ? $orders : array();
@@ -46,7 +46,7 @@ $per_page = isset( $per_page ) ? (int) $per_page : 15;
 
 $pb_rep_base = wc_get_account_endpoint_url( 'affiliate-reports' );
 /**
- * URL dos relatórios preservando filtros.
+ * URL dos relatÃ³rios preservando filtros.
  *
  * @param array $args Query args (merge).
  * @return string
@@ -73,25 +73,25 @@ $chart_config       = wp_json_encode(
 		'labels'       => isset( $chart_series['labels'] ) ? array_values( (array) $chart_series['labels'] ) : array(),
 		'values'       => isset( $chart_series['values'] ) ? array_values( array_map( 'intval', (array) $chart_series['values'] ) ) : array(),
 		'orderValues'  => $chart_order_values,
-		'dslabel'      => __( 'Visitas / cliques', 'pb-affiliates' ),
-		'orderLabel'   => __( 'Pedidos', 'pb-affiliates' ),
+		'dslabel'      => __( 'Visitas / cliques', 'rc-affiliates' ),
+		'orderLabel'   => __( 'Pedidos', 'rc-affiliates' ),
 	),
 	JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP
 );
 ?>
-<h2><?php esc_html_e( 'Relatórios', 'pb-affiliates' ); ?></h2>
+<h2><?php esc_html_e( 'RelatÃ³rios', 'rc-affiliates' ); ?></h2>
 <p class="description">
-	<?php esc_html_e( 'Cliques no seu link e pedidos atribuídos ao seu código, em qualquer estado (incluindo aguardando pagamento). A comissão só é lançada de forma definitiva após a confirmação do pagamento.', 'pb-affiliates' ); ?>
+	<?php esc_html_e( 'Cliques no seu link e pedidos atribuÃ­dos ao seu cÃ³digo, em qualquer estado (incluindo aguardando pagamento). A comissÃ£o sÃ³ Ã© lanÃ§ada de forma definitiva apÃ³s a confirmaÃ§Ã£o do pagamento.', 'rc-affiliates' ); ?>
 </p>
 
-<h3><?php esc_html_e( 'Visitas e cliques', 'pb-affiliates' ); ?></h3>
+<h3><?php esc_html_e( 'Visitas e cliques', 'rc-affiliates' ); ?></h3>
 <ul class="pb-aff-report-summary">
 	<li>
 		<?php
 		echo esc_html(
 			sprintf(
 				/* translators: %d: click count */
-				__( 'Últimos 7 dias: %d eventos', 'pb-affiliates' ),
+				__( 'Ãšltimos 7 dias: %d eventos', 'rc-affiliates' ),
 				isset( $clicks_7d ) ? (int) $clicks_7d : 0
 			)
 		);
@@ -102,7 +102,7 @@ $chart_config       = wp_json_encode(
 		echo esc_html(
 			sprintf(
 				/* translators: %d: click count */
-				__( 'Últimos 30 dias: %d eventos', 'pb-affiliates' ),
+				__( 'Ãšltimos 30 dias: %d eventos', 'rc-affiliates' ),
 				isset( $clicks_30d ) ? (int) $clicks_30d : 0
 			)
 		);
@@ -114,19 +114,19 @@ $chart_config       = wp_json_encode(
 	<form method="get" action="<?php echo esc_url( $pb_rep_base ); ?>" class="pb-aff-chart-period">
 		<input type="hidden" name="pb_c" value="<?php echo esc_attr( (string) $clicks_page ); ?>" />
 		<input type="hidden" name="pb_o" value="<?php echo esc_attr( (string) $orders_page ); ?>" />
-		<label for="pb-aff-chart-days"><?php esc_html_e( 'Período do gráfico', 'pb-affiliates' ); ?></label>
+		<label for="pb-aff-chart-days"><?php esc_html_e( 'PerÃ­odo do grÃ¡fico', 'rc-affiliates' ); ?></label>
 		<select name="pb_ch" id="pb-aff-chart-days" onchange="this.form.submit()">
-			<option value="7" <?php selected( $chart_days, 7 ); ?>><?php esc_html_e( 'Últimos 7 dias', 'pb-affiliates' ); ?></option>
-			<option value="14" <?php selected( $chart_days, 14 ); ?>><?php esc_html_e( 'Últimos 14 dias', 'pb-affiliates' ); ?></option>
-			<option value="30" <?php selected( $chart_days, 30 ); ?>><?php esc_html_e( 'Últimos 30 dias', 'pb-affiliates' ); ?></option>
-			<option value="90" <?php selected( $chart_days, 90 ); ?>><?php esc_html_e( 'Últimos 90 dias', 'pb-affiliates' ); ?></option>
+			<option value="7" <?php selected( $chart_days, 7 ); ?>><?php esc_html_e( 'Ãšltimos 7 dias', 'rc-affiliates' ); ?></option>
+			<option value="14" <?php selected( $chart_days, 14 ); ?>><?php esc_html_e( 'Ãšltimos 14 dias', 'rc-affiliates' ); ?></option>
+			<option value="30" <?php selected( $chart_days, 30 ); ?>><?php esc_html_e( 'Ãšltimos 30 dias', 'rc-affiliates' ); ?></option>
+			<option value="90" <?php selected( $chart_days, 90 ); ?>><?php esc_html_e( 'Ãšltimos 90 dias', 'rc-affiliates' ); ?></option>
 		</select>
-		<noscript><button type="submit" class="button"><?php esc_html_e( 'Aplicar', 'pb-affiliates' ); ?></button></noscript>
+		<noscript><button type="submit" class="button"><?php esc_html_e( 'Aplicar', 'rc-affiliates' ); ?></button></noscript>
 	</form>
 </div>
 
 <div class="pb-aff-chart-wrap">
-	<canvas id="pb-aff-clicks-chart" width="400" height="220" aria-label="<?php esc_attr_e( 'Gráfico de visitas, cliques e pedidos por dia', 'pb-affiliates' ); ?>"></canvas>
+	<canvas id="pb-aff-clicks-chart" width="400" height="220" aria-label="<?php esc_attr_e( 'GrÃ¡fico de visitas, cliques e pedidos por dia', 'rc-affiliates' ); ?>"></canvas>
 </div>
 <script type="application/json" id="pb-aff-chart-json"><?php echo $chart_config; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></script>
 <script>
@@ -180,16 +180,16 @@ window.addEventListener('load', function () {
 });
 </script>
 
-<h4><?php esc_html_e( 'Últimos registros', 'pb-affiliates' ); ?></h4>
+<h4><?php esc_html_e( 'Ãšltimos registros', 'rc-affiliates' ); ?></h4>
 
 <?php if ( ! empty( $recent_hits ) ) : ?>
 	<table class="shop_table shop_table_responsive pb-aff-report-table pb-aff-report-table--hits">
 		<thead>
 			<tr>
-				<th><?php esc_html_e( 'Data e hora', 'pb-affiliates' ); ?></th>
-				<th><?php esc_html_e( 'Origem', 'pb-affiliates' ); ?></th>
-				<th><?php esc_html_e( 'IP de origem', 'pb-affiliates' ); ?></th>
-				<th><?php esc_html_e( 'URL visitado', 'pb-affiliates' ); ?></th>
+				<th><?php esc_html_e( 'Data e hora', 'rc-affiliates' ); ?></th>
+				<th><?php esc_html_e( 'Origem', 'rc-affiliates' ); ?></th>
+				<th><?php esc_html_e( 'IP de origem', 'rc-affiliates' ); ?></th>
+				<th><?php esc_html_e( 'URL visitado', 'rc-affiliates' ); ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -199,26 +199,26 @@ window.addEventListener('load', function () {
 				$pb_hit_url = isset( $hit['visited_url'] ) ? (string) $hit['visited_url'] : '';
 				$pb_hit_url_short = $pb_hit_url;
 				if ( function_exists( 'mb_strlen' ) && mb_strlen( $pb_hit_url_short ) > 56 ) {
-					$pb_hit_url_short = mb_substr( $pb_hit_url_short, 0, 56 ) . '…';
+					$pb_hit_url_short = mb_substr( $pb_hit_url_short, 0, 56 ) . 'â€¦';
 				} elseif ( strlen( $pb_hit_url_short ) > 56 ) {
-					$pb_hit_url_short = substr( $pb_hit_url_short, 0, 56 ) . '…';
+					$pb_hit_url_short = substr( $pb_hit_url_short, 0, 56 ) . 'â€¦';
 				}
 				?>
 				<tr>
-					<td data-title="<?php esc_attr_e( 'Data e hora', 'pb-affiliates' ); ?>">
+					<td data-title="<?php esc_attr_e( 'Data e hora', 'rc-affiliates' ); ?>">
 						<?php echo esc_html( isset( $hit['hit_at'] ) ? (string) $hit['hit_at'] : '' ); ?>
 					</td>
-					<td data-title="<?php esc_attr_e( 'Origem', 'pb-affiliates' ); ?>">
+					<td data-title="<?php esc_attr_e( 'Origem', 'rc-affiliates' ); ?>">
 						<code><?php echo esc_html( isset( $hit['via'] ) ? (string) $hit['via'] : '' ); ?></code>
 					</td>
-					<td data-title="<?php esc_attr_e( 'IP de origem', 'pb-affiliates' ); ?>">
+					<td data-title="<?php esc_attr_e( 'IP de origem', 'rc-affiliates' ); ?>">
 						<code class="pb-aff-hit-ip"><?php echo esc_html( $pb_hit_ip ); ?></code>
 					</td>
-					<td data-title="<?php esc_attr_e( 'URL visitado', 'pb-affiliates' ); ?>" class="pb-aff-hit-url-cell">
+					<td data-title="<?php esc_attr_e( 'URL visitado', 'rc-affiliates' ); ?>" class="pb-aff-hit-url-cell">
 						<?php if ( $pb_hit_url !== '' ) : ?>
 							<a href="<?php echo esc_url( $pb_hit_url ); ?>" target="_blank" rel="noopener noreferrer" class="pb-aff-hit-url" title="<?php echo esc_attr( $pb_hit_url ); ?>"><?php echo esc_html( $pb_hit_url_short ); ?></a>
 						<?php else : ?>
-							—
+							â€”
 						<?php endif; ?>
 					</td>
 				</tr>
@@ -226,13 +226,13 @@ window.addEventListener('load', function () {
 		</tbody>
 	</table>
 	<?php if ( $clicks_max_pages > 1 ) : ?>
-		<nav class="pb-aff-pagination pb-aff-pagination--clicks" aria-label="<?php esc_attr_e( 'Paginação dos registros de clique', 'pb-affiliates' ); ?>">
+		<nav class="pb-aff-pagination pb-aff-pagination--clicks" aria-label="<?php esc_attr_e( 'PaginaÃ§Ã£o dos registros de clique', 'rc-affiliates' ); ?>">
 			<p class="pb-aff-pagination__meta">
 				<?php
 				echo esc_html(
 					sprintf(
 						/* translators: 1: current page, 2: total pages, 3: total items */
-						__( 'Página %1$d de %2$d (%3$d registros)', 'pb-affiliates' ),
+						__( 'PÃ¡gina %1$d de %2$d (%3$d registros)', 'rc-affiliates' ),
 						$clicks_page,
 						$clicks_max_pages,
 						$clicks_total
@@ -242,29 +242,29 @@ window.addEventListener('load', function () {
 			</p>
 			<div class="pb-aff-pagination__links">
 				<?php if ( $clicks_page > 1 ) : ?>
-					<a class="button" href="<?php echo esc_url( $pb_rep_url( array( 'pb_c' => $clicks_page - 1 ) ) ); ?>"><?php esc_html_e( 'Anterior', 'pb-affiliates' ); ?></a>
+					<a class="button" href="<?php echo esc_url( $pb_rep_url( array( 'pb_c' => $clicks_page - 1 ) ) ); ?>"><?php esc_html_e( 'Anterior', 'rc-affiliates' ); ?></a>
 				<?php endif; ?>
 				<?php if ( $clicks_page < $clicks_max_pages ) : ?>
-					<a class="button" href="<?php echo esc_url( $pb_rep_url( array( 'pb_c' => $clicks_page + 1 ) ) ); ?>"><?php esc_html_e( 'Próximo', 'pb-affiliates' ); ?></a>
+					<a class="button" href="<?php echo esc_url( $pb_rep_url( array( 'pb_c' => $clicks_page + 1 ) ) ); ?>"><?php esc_html_e( 'PrÃ³ximo', 'rc-affiliates' ); ?></a>
 				<?php endif; ?>
 			</div>
 		</nav>
 	<?php endif; ?>
 <?php else : ?>
-	<p class="pb-aff-report-empty"><?php esc_html_e( 'Ainda não há eventos de clique registrados desde a ativação do histórico.', 'pb-affiliates' ); ?></p>
+	<p class="pb-aff-report-empty"><?php esc_html_e( 'Ainda nÃ£o hÃ¡ eventos de clique registrados desde a ativaÃ§Ã£o do histÃ³rico.', 'rc-affiliates' ); ?></p>
 <?php endif; ?>
 
-<h3><?php esc_html_e( 'Pedidos com o seu código', 'pb-affiliates' ); ?></h3>
+<h3><?php esc_html_e( 'Pedidos com o seu cÃ³digo', 'rc-affiliates' ); ?></h3>
 
 <?php if ( ! empty( $orders ) ) : ?>
 	<table class="shop_table shop_table_responsive pb-aff-report-table pb-aff-report-table--orders">
 		<thead>
 			<tr>
-				<th><?php esc_html_e( 'Pedido', 'pb-affiliates' ); ?></th>
-				<th><?php esc_html_e( 'Data', 'pb-affiliates' ); ?></th>
-				<th><?php esc_html_e( 'Estado', 'pb-affiliates' ); ?></th>
-				<th><?php esc_html_e( 'Total', 'pb-affiliates' ); ?></th>
-				<th><?php esc_html_e( 'Comissão', 'pb-affiliates' ); ?></th>
+				<th><?php esc_html_e( 'Pedido', 'rc-affiliates' ); ?></th>
+				<th><?php esc_html_e( 'Data', 'rc-affiliates' ); ?></th>
+				<th><?php esc_html_e( 'Estado', 'rc-affiliates' ); ?></th>
+				<th><?php esc_html_e( 'Total', 'rc-affiliates' ); ?></th>
+				<th><?php esc_html_e( 'ComissÃ£o', 'rc-affiliates' ); ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -274,40 +274,40 @@ window.addEventListener('load', function () {
 					continue;
 				}
 				$pb_aff_oid     = $pb_aff_order->get_id();
-				$pb_aff_row     = PB_Affiliates_Reports::get_commission_row_for_order( $pb_aff_oid, $user_id );
-				$pb_aff_preview = PB_Affiliates_Commission::calculate_commission_preview_for_order( $pb_aff_order, $user_id );
+				$pb_aff_row     = RC_Affiliates_Reports::get_commission_row_for_order( $pb_aff_oid, $user_id );
+				$pb_aff_preview = RC_Affiliates_Commission::calculate_commission_preview_for_order( $pb_aff_order, $user_id );
 				$pb_aff_comm_label = '';
 				if ( $pb_aff_row && isset( $pb_aff_row->commission_amount ) ) {
 					$pb_aff_comm_label = wp_kses_post( wc_price( (float) $pb_aff_row->commission_amount, array( 'currency' => $pb_aff_order->get_currency() ) ) );
 					$pb_aff_st         = isset( $pb_aff_row->status ) ? (string) $pb_aff_row->status : '';
 					if ( 'paid' === $pb_aff_st ) {
-						$pb_aff_comm_label .= ' <span class="pb-aff-badge pb-aff-badge--paid">' . esc_html__( 'Paga', 'pb-affiliates' ) . '</span>';
+						$pb_aff_comm_label .= ' <span class="pb-aff-badge pb-aff-badge--paid">' . esc_html__( 'Paga', 'rc-affiliates' ) . '</span>';
 					} elseif ( 'pending' === $pb_aff_st ) {
-						$pb_aff_comm_label .= ' <span class="pb-aff-badge pb-aff-badge--pending">' . esc_html__( 'Pendente', 'pb-affiliates' ) . '</span>';
+						$pb_aff_comm_label .= ' <span class="pb-aff-badge pb-aff-badge--pending">' . esc_html__( 'Pendente', 'rc-affiliates' ) . '</span>';
 					}
 				} elseif ( $pb_aff_preview && $pb_aff_preview['amount'] > 0 ) {
 					$pb_aff_comm_label  = wp_kses_post( wc_price( $pb_aff_preview['amount'], array( 'currency' => $pb_aff_order->get_currency() ) ) );
-					$pb_aff_comm_label .= ' <span class="pb-aff-badge pb-aff-badge--estimate">' . esc_html__( 'Pedido pendente', 'pb-affiliates' ) . '</span>';
+					$pb_aff_comm_label .= ' <span class="pb-aff-badge pb-aff-badge--estimate">' . esc_html__( 'Pedido pendente', 'rc-affiliates' ) . '</span>';
 				} elseif ( $pb_aff_preview && $pb_aff_preview['amount'] <= 0 ) {
-					$pb_aff_comm_label = '—';
+					$pb_aff_comm_label = 'â€”';
 				} else {
-					$pb_aff_comm_label = '—';
+					$pb_aff_comm_label = 'â€”';
 				}
 				?>
 			<tr>
-				<td data-title="<?php esc_attr_e( 'Pedido', 'pb-affiliates' ); ?>">
+				<td data-title="<?php esc_attr_e( 'Pedido', 'rc-affiliates' ); ?>">
 					#<?php echo esc_html( (string) $pb_aff_oid ); ?>
 				</td>
-				<td data-title="<?php esc_attr_e( 'Data', 'pb-affiliates' ); ?>">
+				<td data-title="<?php esc_attr_e( 'Data', 'rc-affiliates' ); ?>">
 					<?php echo esc_html( $pb_aff_order->get_date_created() ? $pb_aff_order->get_date_created()->date_i18n( wc_date_format() ) : '' ); ?>
 				</td>
-				<td data-title="<?php esc_attr_e( 'Estado', 'pb-affiliates' ); ?>">
+				<td data-title="<?php esc_attr_e( 'Estado', 'rc-affiliates' ); ?>">
 					<?php echo esc_html( wc_get_order_status_name( $pb_aff_order->get_status() ) ); ?>
 				</td>
-				<td data-title="<?php esc_attr_e( 'Total', 'pb-affiliates' ); ?>">
+				<td data-title="<?php esc_attr_e( 'Total', 'rc-affiliates' ); ?>">
 					<?php echo wp_kses_post( $pb_aff_order->get_formatted_order_total() ); ?>
 				</td>
-				<td data-title="<?php esc_attr_e( 'Comissão', 'pb-affiliates' ); ?>">
+				<td data-title="<?php esc_attr_e( 'ComissÃ£o', 'rc-affiliates' ); ?>">
 					<?php echo wp_kses_post( $pb_aff_comm_label ); ?>
 				</td>
 			</tr>
@@ -317,13 +317,13 @@ window.addEventListener('load', function () {
 		</tbody>
 	</table>
 	<?php if ( $orders_max_pages > 1 ) : ?>
-		<nav class="pb-aff-pagination pb-aff-pagination--orders" aria-label="<?php esc_attr_e( 'Paginação dos pedidos', 'pb-affiliates' ); ?>">
+		<nav class="pb-aff-pagination pb-aff-pagination--orders" aria-label="<?php esc_attr_e( 'PaginaÃ§Ã£o dos pedidos', 'rc-affiliates' ); ?>">
 			<p class="pb-aff-pagination__meta">
 				<?php
 				echo esc_html(
 					sprintf(
 						/* translators: 1: current page, 2: total pages, 3: total orders */
-						__( 'Página %1$d de %2$d (%3$d pedidos)', 'pb-affiliates' ),
+						__( 'PÃ¡gina %1$d de %2$d (%3$d pedidos)', 'rc-affiliates' ),
 						$orders_page,
 						$orders_max_pages,
 						$orders_total
@@ -333,18 +333,19 @@ window.addEventListener('load', function () {
 			</p>
 			<div class="pb-aff-pagination__links">
 				<?php if ( $orders_page > 1 ) : ?>
-					<a class="button" href="<?php echo esc_url( $pb_rep_url( array( 'pb_o' => $orders_page - 1 ) ) ); ?>"><?php esc_html_e( 'Anterior', 'pb-affiliates' ); ?></a>
+					<a class="button" href="<?php echo esc_url( $pb_rep_url( array( 'pb_o' => $orders_page - 1 ) ) ); ?>"><?php esc_html_e( 'Anterior', 'rc-affiliates' ); ?></a>
 				<?php endif; ?>
 				<?php if ( $orders_page < $orders_max_pages ) : ?>
-					<a class="button" href="<?php echo esc_url( $pb_rep_url( array( 'pb_o' => $orders_page + 1 ) ) ); ?>"><?php esc_html_e( 'Próximo', 'pb-affiliates' ); ?></a>
+					<a class="button" href="<?php echo esc_url( $pb_rep_url( array( 'pb_o' => $orders_page + 1 ) ) ); ?>"><?php esc_html_e( 'PrÃ³ximo', 'rc-affiliates' ); ?></a>
 				<?php endif; ?>
 			</div>
 		</nav>
 	<?php endif; ?>
 <?php else : ?>
-	<p class="pb-aff-report-empty"><?php esc_html_e( 'Ainda não há pedidos atribuídos ao seu código.', 'pb-affiliates' ); ?></p>
+	<p class="pb-aff-report-empty"><?php esc_html_e( 'Ainda nÃ£o hÃ¡ pedidos atribuÃ­dos ao seu cÃ³digo.', 'rc-affiliates' ); ?></p>
 <?php endif; ?>
 
 <p class="pb-aff-report-back">
-	<a href="<?php echo esc_url( wc_get_account_endpoint_url( 'affiliate-area' ) ); ?>" class="button"><?php esc_html_e( '← Área do afiliado', 'pb-affiliates' ); ?></a>
+	<a href="<?php echo esc_url( wc_get_account_endpoint_url( 'affiliate-area' ) ); ?>" class="button"><?php esc_html_e( 'â† Ãrea do afiliado', 'rc-affiliates' ); ?></a>
 </p>
+

@@ -1,5 +1,5 @@
-/**
- * Busca de afiliados (ID, código, e-mail, nome) no formulário do cupom.
+﻿/**
+ * Busca de afiliados (ID, cÃ³digo, e-mail, nome) no formulÃ¡rio do cupom.
  */
 (function () {
 	'use strict';
@@ -10,7 +10,7 @@
 
 	function fetchResults(q) {
 		var body = new URLSearchParams();
-		body.set('action', 'pb_affiliates_search_affiliates');
+		body.set('action', 'RC_Affiliates_search_affiliates');
 		body.set('nonce', cfg.nonce || '');
 		body.set('term', q);
 		return fetch(cfg.ajaxUrl || '', {
@@ -43,7 +43,7 @@
 			var liEmpty = document.createElement('li');
 			liEmpty.className = 'pb-aff-bank-msg';
 			liEmpty.setAttribute('role', 'presentation');
-			liEmpty.textContent = cfg.empty || '—';
+			liEmpty.textContent = cfg.empty || 'â€”';
 			dd.appendChild(liEmpty);
 			dd.hidden = false;
 			return;
@@ -169,3 +169,4 @@
 		runBoot();
 	}
 })();
+

@@ -1,16 +1,16 @@
-/**
- * Área do afiliado — Minha conta (tabela de domínios).
+﻿/**
+ * Ãrea do afiliado â€” Minha conta (tabela de domÃ­nios).
  *
  * Compatibilidade: escopado a `.woocommerce-MyAccount-content` e classes prefixadas `pb-aff-`
- * para não afetar o resto do site. Temas agressivos com `.woocommerce-Button` podem exigir
+ * para nÃ£o afetar o resto do site. Temas agressivos com `.woocommerce-Button` podem exigir
  * `!important` pontual (documentado abaixo). Temas podem desativar esta folha com:
- * `add_filter( 'pb_affiliates_enqueue_account_styles', '__return_false' );`
+ * `add_filter( 'RC_Affiliates_enqueue_account_styles', '__return_false' );`
  *
- * Tamanhos em rem respeitam o zoom do usuário (boas práticas WP).
+ * Tamanhos em rem respeitam o zoom do usuÃ¡rio (boas prÃ¡ticas WP).
  */
 
 /* -------------------------------------------------------------------------
- * Dashboard: destaque compacto (total + pendentes) — primeiro bloco da página
+ * Dashboard: destaque compacto (total + pendentes) â€” primeiro bloco da pÃ¡gina
  * ------------------------------------------------------------------------- */
 
 .woocommerce-MyAccount-content .pb-aff-dashboard-topline {
@@ -93,7 +93,7 @@
 	color: #3d4a5c;
 }
 
-/* Ícone ℹ: significado ao hover / foco (nativo via title) */
+/* Ãcone â„¹: significado ao hover / foco (nativo via title) */
 
 .woocommerce-MyAccount-content .pb-aff-dashboard-info {
 	display: inline-flex;
@@ -135,7 +135,7 @@
 }
 
 /* -------------------------------------------------------------------------
- * Dashboard: resumo de comissões (topo)
+ * Dashboard: resumo de comissÃµes (topo)
  * ------------------------------------------------------------------------- */
 
 .woocommerce-MyAccount-content .pb-aff-dashboard-hero {
@@ -230,14 +230,14 @@
 	margin: 0;
 }
 
-/* Badge / ℹ no hero: encostados ao texto; gap vem do flex do label */
+/* Badge / â„¹ no hero: encostados ao texto; gap vem do flex do label */
 .woocommerce-MyAccount-content .pb-aff-dashboard-hero__label .pb-aff-badge,
 .woocommerce-MyAccount-content .pb-aff-dashboard-hero__label .pb-aff-dashboard-info {
 	margin-left: 0;
 }
 
 /* -------------------------------------------------------------------------
- * Link de afiliado + ícone ℹ no texto introdutório
+ * Link de afiliado + Ã­cone â„¹ no texto introdutÃ³rio
  * ------------------------------------------------------------------------- */
 
 .woocommerce-MyAccount-content .pb-aff-link-row {
@@ -262,7 +262,7 @@
 }
 
 /* -------------------------------------------------------------------------
- * Tabela e cabeçalho
+ * Tabela e cabeÃ§alho
  * ------------------------------------------------------------------------- */
 
 .pb-aff-domain-heading {
@@ -280,7 +280,7 @@
 }
 
 /* -------------------------------------------------------------------------
- * Grupo de ações: layout flexível, sem forçar largura total (comum em temas WC)
+ * Grupo de aÃ§Ãµes: layout flexÃ­vel, sem forÃ§ar largura total (comum em temas WC)
  * ------------------------------------------------------------------------- */
 
 .woocommerce-MyAccount-content .pb-aff-domain-actions {
@@ -299,7 +299,7 @@
 }
 
 /* -------------------------------------------------------------------------
- * Botões — base (rem). !important só onde temas sobrescrevem min-height/padding.
+ * BotÃµes â€” base (rem). !important sÃ³ onde temas sobrescrevem min-height/padding.
  * ------------------------------------------------------------------------- */
 
 .woocommerce-MyAccount-content .pb-aff-domain-actions .button,
@@ -318,7 +318,7 @@
 	justify-content: center;
 	text-decoration: none;
 	transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-	/* Temas (min-height ~44px em botões WC) — override pontual */
+	/* Temas (min-height ~44px em botÃµes WC) â€” override pontual */
 	min-height: 0;
 	height: auto;
 }
@@ -331,12 +331,12 @@
 	line-height: 1.25 !important;
 }
 
-/* Primário */
+/* PrimÃ¡rio */
 .woocommerce-MyAccount-content .pb-aff-domain-actions .button.pb-aff-btn--primary {
 	font-weight: 600;
 }
 
-/* Secundário — contorno; !important para vencer fundo sólido do tema */
+/* SecundÃ¡rio â€” contorno; !important para vencer fundo sÃ³lido do tema */
 .woocommerce-MyAccount-content .pb-aff-domain-actions .button.pb-aff-btn--secondary {
 	background: transparent !important;
 	color: var(--wc-primary, #2271b1) !important;
@@ -349,7 +349,7 @@
 	background: rgba(0, 0, 0, 0.06) !important;
 }
 
-/* Destrutivo — contraste explícito */
+/* Destrutivo â€” contraste explÃ­cito */
 .woocommerce-MyAccount-content .pb-aff-domain-actions .button.pb-aff-btn--danger {
 	background: #c53030 !important;
 	color: #fff !important;
@@ -370,7 +370,7 @@
 }
 
 /* -------------------------------------------------------------------------
- * Instruções (URL + token) — texto secundário
+ * InstruÃ§Ãµes (URL + token) â€” texto secundÃ¡rio
  * ------------------------------------------------------------------------- */
 
 .pb-aff-domain-table__instructions td {
@@ -378,7 +378,7 @@
 	border-top: none;
 }
 
-/* Ligeiramente menor que o texto padrão do tema (~1rem) */
+/* Ligeiramente menor que o texto padrÃ£o do tema (~1rem) */
 .woocommerce-MyAccount-content .pb-aff-domain-table tr.pb-aff-domain-table__instructions .description,
 .woocommerce-MyAccount-content .pb-aff-domain-table tr.pb-aff-domain-table__instructions .description a {
 	font-size: 0.8rem !important;
@@ -407,7 +407,7 @@
 }
 
 /* -------------------------------------------------------------------------
- * Reforço quando o body tem classe WC (maioria dos temas)
+ * ReforÃ§o quando o body tem classe WC (maioria dos temas)
  * ------------------------------------------------------------------------- */
 
 body.woocommerce-account .woocommerce-MyAccount-content table.shop_table.pb-aff-domain-table td.pb-aff-domain-table__action .pb-aff-domain-actions .button.woocommerce-Button,
@@ -417,7 +417,7 @@ body.woocommerce-account .woocommerce-MyAccount-content table.shop_table.pb-aff-
 	width: auto !important;
 }
 
-/* Relatórios (cliques + pedidos) */
+/* RelatÃ³rios (cliques + pedidos) */
 
 .woocommerce-MyAccount-content .pb-aff-report-summary {
 	margin: 0 0 1em 1.25em;
@@ -428,7 +428,7 @@ body.woocommerce-account .woocommerce-MyAccount-content table.shop_table.pb-aff-
 	margin-top: 0.5em;
 }
 
-/* Tabela compacta: últimos registros (IP + URL) */
+/* Tabela compacta: Ãºltimos registros (IP + URL) */
 
 .woocommerce-MyAccount-content table.shop_table.pb-aff-report-table--hits {
 	font-size: 0.8125rem;
@@ -495,7 +495,7 @@ body.woocommerce-account .woocommerce-MyAccount-content table.shop_table.pb-aff-
 	color: #1e6b3a;
 }
 
-/* Gráfico de cliques + período */
+/* GrÃ¡fico de cliques + perÃ­odo */
 
 .woocommerce-MyAccount-content .pb-aff-chart-toolbar {
 	margin: 1em 0;
@@ -525,7 +525,7 @@ body.woocommerce-account .woocommerce-MyAccount-content table.shop_table.pb-aff-
 	max-height: 280px;
 }
 
-/* Paginação tabelas */
+/* PaginaÃ§Ã£o tabelas */
 
 .woocommerce-MyAccount-content .pb-aff-pagination {
 	margin: 1em 0 1.75em;
@@ -621,7 +621,7 @@ body.woocommerce-account .woocommerce-MyAccount-content table.shop_table.pb-aff-
 	margin-top: 0;
 }
 
-/* Alinha com .woocommerce-error: ícone via ::before (absolute, left 1.5em) precisa de padding-left ~3.5em. */
+/* Alinha com .woocommerce-error: Ã­cone via ::before (absolute, left 1.5em) precisa de padding-left ~3.5em. */
 .woocommerce-MyAccount-content .pb-aff-receipt-alert.woocommerce-error {
 	margin: 0 0 1rem;
 	padding: 0.85rem 1rem 0.85rem 3.5em;
@@ -698,7 +698,7 @@ body.woocommerce-account .woocommerce-MyAccount-content table.shop_table.pb-aff-
 }
 
 /* -------------------------------------------------------------------------
- * Hub do afiliado — navegação, métricas de período, painel “app-like”
+ * Hub do afiliado â€” navegaÃ§Ã£o, mÃ©tricas de perÃ­odo, painel â€œapp-likeâ€
  * ------------------------------------------------------------------------- */
 
 .woocommerce-MyAccount-content .pb-aff-hub {
@@ -717,7 +717,7 @@ body.woocommerce-account .woocommerce-MyAccount-content table.shop_table.pb-aff-
 	box-sizing: border-box;
 }
 
-/* Cada bloco da página (links, materiais) numa coluna total — evita dois painéis lado a lado no tema */
+/* Cada bloco da pÃ¡gina (links, materiais) numa coluna total â€” evita dois painÃ©is lado a lado no tema */
 .woocommerce-MyAccount-content .pb-aff-hub--subpage > * {
 	width: 100%;
 	max-width: 100%;
@@ -1024,7 +1024,7 @@ body.woocommerce-account .woocommerce-MyAccount-content table.shop_table.pb-aff-
 }
 
 /* -------------------------------------------------------------------------
- * zip1.io — link curto
+ * zip1.io â€” link curto
  * ------------------------------------------------------------------------- */
 
 .woocommerce-MyAccount-content .pb-aff-zip1-box {
@@ -1149,4 +1149,5 @@ body.woocommerce-account .woocommerce-MyAccount-content table.shop_table.pb-aff-
 	border: 1px solid #a7f3d0;
 	color: #065f46;
 }
+
 

@@ -1,11 +1,11 @@
-/**
- * PB Afiliados — settings: conditional rows + payment mode cards.
+﻿/**
+ * rc affiliates â€” settings: conditional rows + payment mode cards.
  */
 (function () {
 	'use strict';
 
 	function getModeRadios() {
-		return document.querySelectorAll('input[name="pb_affiliates_settings[payment_mode]"]');
+		return document.querySelectorAll('input[name="RC_Affiliates_settings[payment_mode]"]');
 	}
 
 	function getSelectedMode() {
@@ -64,3 +64,5 @@
 		init();
 	}
 })();
+
+

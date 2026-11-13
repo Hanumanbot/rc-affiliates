@@ -1,17 +1,17 @@
-#!/usr/bin/env php
+﻿#!/usr/bin/env php
 <?php
 // phpcs:ignoreFile -- CLI development utility; excluded from distribution ZIP (.distignore).
 
 /**
- * Cria pedidos WooCommerce de teste com atribuição e registro de comissão para um afiliado (ID de usuário).
+ * Cria pedidos WooCommerce de teste com atribuiÃ§Ã£o e registro de comissÃ£o para um afiliado (ID de usuÃ¡rio).
  *
  * Uso (raiz WP em `woocommerce/`):
- *   php wp-content/plugins/pb-affiliates/tools/seed-orders-by-affiliate-id.php 30 40
+ *   php wp-content/plugins/rc-affiliates/tools/seed-orders-by-affiliate-id.php 30 40
  *
  * Docker:
- *   docker compose exec wordpress php /var/www/html/wp-content/plugins/pb-affiliates/tools/seed-orders-by-affiliate-id.php 30 40
+ *   docker compose exec wordpress php /var/www/html/wp-content/plugins/rc-affiliates/tools/seed-orders-by-affiliate-id.php 30 40
  *
- * @package PB_Affiliates
+ * @package RC_Affiliates
  */
 
 if ( php_sapi_name() !== 'cli' ) {
@@ -21,7 +21,7 @@ if ( php_sapi_name() !== 'cli' ) {
 
 $wp_root = dirname( __DIR__, 4 );
 if ( ! is_readable( $wp_root . '/wp-load.php' ) ) {
-	fwrite( STDERR, "wp-load.php não encontrado em: {$wp_root}\n" );
+	fwrite( STDERR, "wp-load.php nÃ£o encontrado em: {$wp_root}\n" );
 	exit( 1 );
 }
 
@@ -31,8 +31,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit( 1 );
 }
 
-if ( ! function_exists( 'wc_create_order' ) || ! class_exists( 'PB_Affiliates_Commission', false ) ) {
-	fwrite( STDERR, "WooCommerce ou PB Afiliados não está carregado.\n" );
+if ( ! function_exists( 'wc_create_order' ) || ! class_exists( 'RC_Affiliates_Commission', false ) ) {
+	fwrite( STDERR, "WooCommerce ou rc affiliates nÃ£o estÃ¡ carregado.\n" );
 	exit( 1 );
 }
 
@@ -46,7 +46,7 @@ if ( $aff_id <= 0 ) {
 
 $user = get_userdata( $aff_id );
 if ( ! $user ) {
-	fwrite( STDERR, "Usuário #{$aff_id} não existe.\n" );
+	fwrite( STDERR, "UsuÃ¡rio #{$aff_id} nÃ£o existe.\n" );
 	exit( 1 );
 }
 
@@ -55,8 +55,8 @@ if ( '' === $aff_code ) {
 	$aff_code = 'seed_' . $aff_id;
 }
 
-if ( ! PB_Affiliates_Role::user_is_affiliate( $aff_id ) ) {
-	fwrite( STDERR, "Aviso: usuário #{$aff_id} não está com estado de afiliado ativo; create_commission_for_order pode não registrar comissão.\n" );
+if ( ! RC_Affiliates_Role::user_is_affiliate( $aff_id ) ) {
+	fwrite( STDERR, "Aviso: usuÃ¡rio #{$aff_id} nÃ£o estÃ¡ com estado de afiliado ativo; create_commission_for_order pode nÃ£o registrar comissÃ£o.\n" );
 }
 
 $find_product_id = static function () {
@@ -84,7 +84,7 @@ $now         = time();
 $created     = 0;
 $commissions = 0;
 
-add_filter( 'pb_affiliates_send_new_sale_email', '__return_false', 999 );
+add_filter( 'RC_Affiliates_send_new_sale_email', '__return_false', 999 );
 
 for ( $j = 0; $j < $count; $j++ ) {
 	$day_offset = wp_rand( 0, 75 );
@@ -149,14 +149,16 @@ for ( $j = 0; $j < $count; $j++ ) {
 
 	$order = wc_get_order( $oid );
 	if ( $order ) {
-		PB_Affiliates_Commission::create_commission_for_order( $order );
+		RC_Affiliates_Commission::create_commission_for_order( $order );
 		if ( $order->get_meta( '_pb_commission_recorded' ) ) {
 			++$commissions;
 		}
 	}
 }
 
-remove_filter( 'pb_affiliates_send_new_sale_email', '__return_false', 999 );
+remove_filter( 'RC_Affiliates_send_new_sale_email', '__return_false', 999 );
 
-echo "Concluído: afiliado #{$aff_id}, {$created} pedidos criados, {$commissions} comissões registradas.\n";
+echo "ConcluÃ­do: afiliado #{$aff_id}, {$created} pedidos criados, {$commissions} comissÃµes registradas.\n";
 exit( 0 );
+
+

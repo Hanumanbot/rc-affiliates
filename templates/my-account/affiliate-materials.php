@@ -1,9 +1,9 @@
-<?php
+﻿<?php
 /**
- * Materiais promocionais (afiliado — Minha conta).
+ * Materiais promocionais (afiliado â€” Minha conta).
  *
- * @package PB_Affiliates
- * @var array<int, array<string, mixed>> $pb_aff_promo_materials Linhas para exibição.
+ * @package RC_Affiliates
+ * @var array<int, array<string, mixed>> $pb_aff_promo_materials Linhas para exibiÃ§Ã£o.
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -12,13 +12,13 @@ $pb_aff_promo_materials = isset( $pb_aff_promo_materials ) && is_array( $pb_aff_
 $pb_aff_nav_active        = isset( $pb_aff_nav_active ) ? (string) $pb_aff_nav_active : 'materials';
 ?>
 <div class="pb-aff-hub pb-aff-hub--subpage">
-	<?php include PB_AFFILIATES_PATH . 'templates/my-account/parts/affiliate-hub-nav.php'; ?>
+	<?php include RC_Affiliates_PATH . 'templates/my-account/parts/affiliate-hub-nav.php'; ?>
 </div>
 <div class="pb-aff-promo-materials" data-pb-aff-promo-materials="1">
-	<h2><?php esc_html_e( 'Materiais promocionais', 'pb-affiliates' ); ?></h2>
-	<p class="description"><?php esc_html_e( 'Arquivos disponibilizados pela loja para uso em suas campanhas.', 'pb-affiliates' ); ?></p>
+	<h2><?php esc_html_e( 'Materiais promocionais', 'rc-affiliates' ); ?></h2>
+	<p class="description"><?php esc_html_e( 'Arquivos disponibilizados pela loja para uso em suas campanhas.', 'rc-affiliates' ); ?></p>
 	<?php if ( empty( $pb_aff_promo_materials ) ) : ?>
-		<p><?php esc_html_e( 'Nenhum material disponível no momento.', 'pb-affiliates' ); ?></p>
+		<p><?php esc_html_e( 'Nenhum material disponÃ­vel no momento.', 'rc-affiliates' ); ?></p>
 	<?php else : ?>
 		<ul class="pb-aff-promo-materials-list woocommerce-MyAccount-content">
 			<?php foreach ( $pb_aff_promo_materials as $row ) : ?>
@@ -47,7 +47,7 @@ $pb_aff_nav_active        = isset( $pb_aff_nav_active ) ? (string) $pb_aff_nav_a
 					</div>
 					<?php if ( $url ) : ?>
 						<a class="button woocommerce-Button pb-aff-btn--secondary pb-aff-promo-materials-list__download" href="<?php echo esc_url( $url ); ?>" download target="_blank" rel="noopener noreferrer">
-							<?php esc_html_e( 'Download', 'pb-affiliates' ); ?>
+							<?php esc_html_e( 'Download', 'rc-affiliates' ); ?>
 						</a>
 					<?php endif; ?>
 				</li>
@@ -55,3 +55,4 @@ $pb_aff_nav_active        = isset( $pb_aff_nav_active ) ? (string) $pb_aff_nav_a
 		</ul>
 	<?php endif; ?>
 </div>
+

@@ -1,19 +1,19 @@
-#!/usr/bin/env php
+﻿#!/usr/bin/env php
 <?php
 // phpcs:ignoreFile -- CLI development utility; excluded from distribution ZIP (.distignore).
 
 /**
- * Corrige dados de demonstração no log de cliques:
+ * Corrige dados de demonstraÃ§Ã£o no log de cliques:
  * - Preenche client_ip e visited_url vazios com valores de exemplo.
- * - Normaliza `via` para valores que o plugin usa na prática: cookie_param | referrer
+ * - Normaliza `via` para valores que o plugin usa na prÃ¡tica: cookie_param | referrer
  *   (remove link, qr, etc.).
  *
  * Opcional: alinha meta `_pb_attribution_source` em pedidos com link/qr.
  *
  * Uso (raiz WP):
- *   php wp-content/plugins/pb-affiliates/tools/backfill-click-log-demo.php
+ *   php wp-content/plugins/rc-affiliates/tools/backfill-click-log-demo.php
  *
- * @package PB_Affiliates
+ * @package RC_Affiliates
  */
 
 if ( php_sapi_name() !== 'cli' ) {
@@ -23,7 +23,7 @@ if ( php_sapi_name() !== 'cli' ) {
 
 $wp_root = dirname( __DIR__, 4 );
 if ( ! is_readable( $wp_root . '/wp-load.php' ) ) {
-	fwrite( STDERR, "wp-load.php não encontrado em: {$wp_root}\n" );
+	fwrite( STDERR, "wp-load.php nÃ£o encontrado em: {$wp_root}\n" );
 	exit( 1 );
 }
 
@@ -36,8 +36,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $wpdb;
 
 $pb_ref_param = 'pid';
-if ( class_exists( 'PB_Affiliates_Settings' ) ) {
-	$pb_ref_param = sanitize_key( PB_Affiliates_Settings::get()['referral_param'] ?? 'pid' );
+if ( class_exists( 'RC_Affiliates_Settings' ) ) {
+	$pb_ref_param = sanitize_key( RC_Affiliates_Settings::get()['referral_param'] ?? 'pid' );
 }
 
 $table       = $wpdb->prefix . 'pagbank_affiliate_click_log';
@@ -151,7 +151,8 @@ if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $om_table ) ) === $o
 }
 
 if ( $orders_meta > 0 ) {
-	echo "Pedidos (postmeta/HPOS): {$orders_meta} meta _pb_attribution_source normalizadas (link→cookie_param, qr→referrer).\n";
+	echo "Pedidos (postmeta/HPOS): {$orders_meta} meta _pb_attribution_source normalizadas (linkâ†’cookie_param, qrâ†’referrer).\n";
 }
 
 exit( 0 );
+

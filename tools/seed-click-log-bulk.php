@@ -1,29 +1,29 @@
-#!/usr/bin/env php
+﻿#!/usr/bin/env php
 <?php
 // phpcs:ignoreFile -- CLI development utility; excluded from distribution ZIP (.distignore).
 
 /**
- * Insere um grande volume de registros fictícios em `pagbank_affiliate_click_log`
- * para testar desempenho dos relatórios admin (agrupamentos, intervalos de data, etc.).
+ * Insere um grande volume de registros fictÃ­cios em `pagbank_affiliate_click_log`
+ * para testar desempenho dos relatÃ³rios admin (agrupamentos, intervalos de data, etc.).
  *
- * Uso (raiz do WordPress, pasta onde está o wp-load.php):
+ * Uso (raiz do WordPress, pasta onde estÃ¡ o wp-load.php):
  *
- *   php wp-content/plugins/pb-affiliates/tools/seed-click-log-bulk.php
- *   php wp-content/plugins/pb-affiliates/tools/seed-click-log-bulk.php --count=20000 --days=180
- *   php wp-content/plugins/pb-affiliates/tools/seed-click-log-bulk.php --count=50000 --yes
+ *   php wp-content/plugins/rc-affiliates/tools/seed-click-log-bulk.php
+ *   php wp-content/plugins/rc-affiliates/tools/seed-click-log-bulk.php --count=20000 --days=180
+ *   php wp-content/plugins/rc-affiliates/tools/seed-click-log-bulk.php --count=50000 --yes
  *
- * Docker (ex.: este repositório monta `./woocommerce` em `/var/www/html`):
+ * Docker (ex.: este repositÃ³rio monta `./woocommerce` em `/var/www/html`):
  *
- *   docker compose exec wordpress php /var/www/html/wp-content/plugins/pb-affiliates/tools/seed-click-log-bulk.php --yes
+ *   docker compose exec wordpress php /var/www/html/wp-content/plugins/rc-affiliates/tools/seed-click-log-bulk.php --yes
  *
- * Opções:
- *   --count=N   Quantidade de linhas (padrão 20000, máximo 500000).
- *   --days=N    Espalhar `hit_at` nos últimos N dias (padrão 120).
- *   --chunk=N   Tamanho de cada INSERT em lote (padrão 400, máx. 2000).
- *   --dry-run   Só mostra quantos afiliados foram encontrados e sai.
- *   --yes       Não pedir confirmação.
+ * OpÃ§Ãµes:
+ *   --count=N   Quantidade de linhas (padrÃ£o 20000, mÃ¡ximo 500000).
+ *   --days=N    Espalhar `hit_at` nos Ãºltimos N dias (padrÃ£o 120).
+ *   --chunk=N   Tamanho de cada INSERT em lote (padrÃ£o 400, mÃ¡x. 2000).
+ *   --dry-run   SÃ³ mostra quantos afiliados foram encontrados e sai.
+ *   --yes       NÃ£o pedir confirmaÃ§Ã£o.
  *
- * @package PB_Affiliates
+ * @package RC_Affiliates
  */
 
 if ( php_sapi_name() !== 'cli' ) {
@@ -33,7 +33,7 @@ if ( php_sapi_name() !== 'cli' ) {
 
 $wp_root = dirname( __DIR__, 4 );
 if ( ! is_readable( $wp_root . '/wp-load.php' ) ) {
-	fwrite( STDERR, "wp-load.php não encontrado em: {$wp_root}\n" );
+	fwrite( STDERR, "wp-load.php nÃ£o encontrado em: {$wp_root}\n" );
 	exit( 1 );
 }
 
@@ -58,8 +58,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $wpdb;
 
 $pb_ref_param = 'pid';
-if ( class_exists( 'PB_Affiliates_Settings' ) ) {
-	$pb_ref_param = sanitize_key( PB_Affiliates_Settings::get()['referral_param'] ?? 'pid' );
+if ( class_exists( 'RC_Affiliates_Settings' ) ) {
+	$pb_ref_param = sanitize_key( RC_Affiliates_Settings::get()['referral_param'] ?? 'pid' );
 }
 
 $table = $wpdb->prefix . 'pagbank_affiliate_click_log';
@@ -90,7 +90,7 @@ foreach ( $aff_ids as $aid ) {
 
 echo 'Afiliados no pool: ' . count( $aff_ids ) . "\n";
 echo "Tabela: {$table}\n";
-echo "Planejado: {$count} registros, últimos {$days} dias, lotes de {$chunk}.\n";
+echo "Planejado: {$count} registros, Ãºltimos {$days} dias, lotes de {$chunk}.\n";
 
 if ( $dry ) {
 	echo "(dry-run: nada foi inserido)\n";
@@ -98,7 +98,7 @@ if ( $dry ) {
 }
 
 if ( ! $assume ) {
-	echo "Confirma inserção? Digite yes: ";
+	echo "Confirma inserÃ§Ã£o? Digite yes: ";
 	$line = '';
 	if ( PHP_VERSION_ID >= 70200 && function_exists( 'readline' ) ) {
 		$line = readline( '' );
@@ -126,7 +126,7 @@ $ref_pool = array(
 	'qr-landing.site',
 	'midiasocial.example',
 	'forum.dev',
-	PB_Affiliates_Click_Log::REFERER_HOST_LOCAL,
+	RC_Affiliates_Click_Log::REFERER_HOST_LOCAL,
 );
 $path_pool = array(
 	'/',
@@ -195,17 +195,18 @@ while ( $inserted < $count ) {
 	$sql = "INSERT INTO `{$table}` (affiliate_id, hit_at, via, client_ip, visited_url, referer_host) VALUES " . implode( ',', $values );
 	$ok  = $wpdb->query( $sql );
 	if ( false === $ok ) {
-		fwrite( STDERR, "Erro no lote após {$inserted} linhas: " . $wpdb->last_error . "\n" );
+		fwrite( STDERR, "Erro no lote apÃ³s {$inserted} linhas: " . $wpdb->last_error . "\n" );
 		exit( 1 );
 	}
 
 	$inserted += $n_batch;
 	if ( 0 === ( $inserted % ( $chunk * 25 ) ) || $inserted === $count ) {
-		echo "… {$inserted} / {$count}\n";
+		echo "â€¦ {$inserted} / {$count}\n";
 	}
 }
 
 $sec = round( microtime( true ) - $t0, 2 );
-echo "Concluído: {$inserted} registros em {$sec} s (~" . round( $inserted / max( 0.001, $sec ) ) . " linhas/s).\n";
+echo "ConcluÃ­do: {$inserted} registros em {$sec} s (~" . round( $inserted / max( 0.001, $sec ) ) . " linhas/s).\n";
 
 exit( 0 );
+

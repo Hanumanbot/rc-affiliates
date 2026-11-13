@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 /**
  * Email plain: affiliate registered.
  *
- * @package PB_Affiliates
+ * @package RC_Affiliates
  * @var WP_User $user User.
  * @var bool    $pending Pending.
  */
@@ -13,7 +13,7 @@ if ( $pending ) {
 	echo esc_html(
 		sprintf(
 			/* translators: %s: user display name */
-			__( 'Olá %s, seu cadastro de afiliado foi recebido e aguarda aprovação.', 'pb-affiliates' ),
+			__( 'OlÃ¡ %s, seu cadastro de afiliado foi recebido e aguarda aprovaÃ§Ã£o.', 'rc-affiliates' ),
 			$user->display_name
 		)
 	);
@@ -21,8 +21,9 @@ if ( $pending ) {
 	echo esc_html(
 		sprintf(
 			/* translators: %s: user display name */
-			__( 'Olá %s, seu cadastro de afiliado está ativo.', 'pb-affiliates' ),
+			__( 'OlÃ¡ %s, seu cadastro de afiliado estÃ¡ ativo.', 'rc-affiliates' ),
 			$user->display_name
 		)
 	);
 }
+

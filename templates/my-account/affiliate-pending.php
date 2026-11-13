@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 /**
- * Afiliado aguardando aprovação.
+ * Afiliado aguardando aprovaÃ§Ã£o.
  *
- * @package PB_Affiliates
+ * @package RC_Affiliates
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -11,4 +11,5 @@ if ( function_exists( 'wc_print_notices' ) ) {
 	wc_print_notices();
 }
 ?>
-<p><?php esc_html_e( 'Seu pedido para participar do programa de afiliados está aguardando aprovação da loja. Você receberá um e-mail quando for analisado.', 'pb-affiliates' ); ?></p>
+<p><?php esc_html_e( 'Seu pedido para participar do programa de afiliados estÃ¡ aguardando aprovaÃ§Ã£o da loja. VocÃª receberÃ¡ um e-mail quando for analisado.', 'rc-affiliates' ); ?></p>
+

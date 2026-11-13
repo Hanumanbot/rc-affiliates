@@ -1,4 +1,4 @@
-﻿=== PB Afiliados ===
+﻿=== rc affiliates ===
 Contributors: martins56
 Tags: woocommerce, affiliates, pagbank, commissions, referral program
 Requires at least: 6.2
@@ -12,7 +12,7 @@ WooCommerce affiliate program with PagBank: referral links, flexible commissions
 
 == Description ==
 
-**rc affiliates** (PB Afiliados) is built for stores that want referral revenue without spreadsheets or duct tape. You set the rules; the plugin tracks clicks, attributes orders, calculates commissions, and gives each affiliate a clear hub inside their account â€” while you keep full control in WordPress.
+**rc affiliates** (rc affiliates) is built for stores that want referral revenue without spreadsheets or duct tape. You set the rules; the plugin tracks clicks, attributes orders, calculates commissions, and gives each affiliate a clear hub inside their account â€” while you keep full control in WordPress.
 
 = Why choose this plugin? =
 
@@ -42,7 +42,7 @@ These requirements are intentional: they keep payouts, orders, and gateways alig
 
 == Installation ==
 
-1. Upload the `pb-affiliates` folder to `wp-content/plugins/`.
+1. Upload the `rc-affiliates` folder to `wp-content/plugins/`.
 2. Confirm **HPOS** is enabled in WooCommerce and **PagBank Connect** is configured.
 3. Activate **rc affiliates** under Plugins.
 4. Configure **Affiliates â†’ Settings** (default commission, cookie duration, payment mode, etc.).
@@ -102,4 +102,6 @@ Commissions are only calculated for orders attributed to an **active** affiliate
 
 = 1.0.0 =
 * Initial release.
+
+
 

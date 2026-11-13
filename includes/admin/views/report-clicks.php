@@ -1,59 +1,59 @@
-<?php
+﻿<?php
 /**
- * Admin: relatório de cliques (gráficos).
+ * Admin: relatÃ³rio de cliques (grÃ¡ficos).
  *
- * @package PB_Affiliates
+ * @package RC_Affiliates
  *
  * @var array                  $ranges           Intervalos (WC).
  * @var string                 $current_range    Intervalo ativo.
  * @var int                    $aff_id           Filtro afiliado (0 = todos).
  * @var string                 $pb_order_status  Filtro de estado do pedido (vazio = todos).
  * @var array                  $wc_order_status_choices slug => etiqueta (WooCommerce).
- * @var array                  $affiliates       Lista de usuários WP_User parciais.
- * @var string                 $chart_data_json  JSON série temporal.
+ * @var array                  $affiliates       Lista de usuÃ¡rios WP_User parciais.
+ * @var string                 $chart_data_json  JSON sÃ©rie temporal.
  * @var string                 $pie_series_json  JSON fatias pie (via).
  * @var string                 $referer_domain_bubble_series_json Bolhas: h, label, clicks, orders.
  * @var array                  $referer_domain_bubble_rows         Mesmos dados (PHP + tabela).
- * @var int                    $total_clicks      Soma de cliques no período.
- * @var int                    $orders_in_range   Pedidos com afiliado no período.
+ * @var int                    $total_clicks      Soma de cliques no perÃ­odo.
+ * @var int                    $orders_in_range   Pedidos com afiliado no perÃ­odo.
  * @var float                  $orders_total_in_range Soma dos totais dos pedidos (get_total).
- * @var float                  $report_commission_total Soma das comissões (tabela/meta/preview) dos pedidos no período.
- * @var float                  $report_commission_available Soma de comissões pendentes com repasse manual na tabela, mesmos pedidos.
+ * @var float                  $report_commission_total Soma das comissÃµes (tabela/meta/preview) dos pedidos no perÃ­odo.
+ * @var float                  $report_commission_available Soma de comissÃµes pendentes com repasse manual na tabela, mesmos pedidos.
  * @var array                  $order_chart_money currency symbol/decimals for chart axis.
- * @var bool                   $hide_empty_referer Ocultar bucket sem host Referer (interruptor na secção de domínio).
- * @var string                 $ref_sort         Lista domínios: ordenar por clicks|orders|rate.
+ * @var bool                   $hide_empty_referer Ocultar bucket sem host Referer (interruptor na secÃ§Ã£o de domÃ­nio).
+ * @var string                 $ref_sort         Lista domÃ­nios: ordenar por clicks|orders|rate.
  * @var string                 $ref_dir          asc|desc.
- * @var int                    $ref_paged        Página atual da lista (1-based).
- * @var int                    $ref_per_page     Linhas por página.
+ * @var int                    $ref_paged        PÃ¡gina atual da lista (1-based).
+ * @var int                    $ref_per_page     Linhas por pÃ¡gina.
  * @var array                  $pb_report_nav_base Query args base (page, range, filtros) para URLs das tabelas.
- * @var array                  $referer_domain_table_rows Linhas da página atual (domínio, cliques, pedidos, taxa).
- * @var int                    $referer_domain_table_total Total de linhas (todos os domínios).
- * @var int                    $referer_domain_table_total_pages Total de páginas.
+ * @var array                  $referer_domain_table_rows Linhas da pÃ¡gina atual (domÃ­nio, cliques, pedidos, taxa).
+ * @var int                    $referer_domain_table_total Total de linhas (todos os domÃ­nios).
+ * @var int                    $referer_domain_table_total_pages Total de pÃ¡ginas.
  * @var string                 $aff_sort Ordenar tabela afiliados: clicks|orders|rate.
  * @var string                 $aff_dir asc|desc.
- * @var int                    $aff_paged Página da tabela afiliados.
- * @var int                    $aff_per_page Linhas por página na tabela de desempenho por afiliado (predefinição 10).
- * @var array                  $affiliate_perf_table_rows Linhas afiliado: name, code, clicks, orders, rate_pct, detail_url…
+ * @var int                    $aff_paged PÃ¡gina da tabela afiliados.
+ * @var int                    $aff_per_page Linhas por pÃ¡gina na tabela de desempenho por afiliado (predefiniÃ§Ã£o 10).
+ * @var array                  $affiliate_perf_table_rows Linhas afiliado: name, code, clicks, orders, rate_pct, detail_urlâ€¦
  * @var int                    $affiliate_perf_table_total Total de afiliados com dados.
- * @var int                    $affiliate_perf_table_total_pages Total de páginas.
- * @var string                 $ord_sort Ordenação pedidos no período: order_id|date|status|affiliate|commission.
+ * @var int                    $affiliate_perf_table_total_pages Total de pÃ¡ginas.
+ * @var string                 $ord_sort OrdenaÃ§Ã£o pedidos no perÃ­odo: order_id|date|status|affiliate|commission.
  * @var string                 $ord_dir asc|desc.
- * @var int                    $ord_paged Página da tabela de pedidos.
+ * @var int                    $ord_paged PÃ¡gina da tabela de pedidos.
  * @var array                  $period_orders_rows Linhas: order_id, order_number, edit_url, date_display, status_label, affiliate_*, commission.
  * @var int                    $period_orders_total Total de pedidos listados.
- * @var int                    $period_orders_total_pages Total de páginas.
- * @var PB_Affiliates_Admin_Click_Report $this Relatório (intervalo, groupby).
+ * @var int                    $period_orders_total_pages Total de pÃ¡ginas.
+ * @var RC_Affiliates_Admin_Click_Report $this RelatÃ³rio (intervalo, groupby).
  */
 
 defined( 'ABSPATH' ) || exit;
 
 global $wp_locale;
 
-// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Vista do relatório: GET só para filtros/UI; intervalo customizado validado ao carregar dados (wc_reports_nonce).
+// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Vista do relatÃ³rio: GET sÃ³ para filtros/UI; intervalo customizado validado ao carregar dados (wc_reports_nonce).
 
 ?>
 <div class="wrap pb-aff-wrap pb-aff-click-report woocommerce">
-	<h1 class="wp-heading-inline"><?php esc_html_e( 'Relatórios de afiliados', 'pb-affiliates' ); ?></h1>
+	<h1 class="wp-heading-inline"><?php esc_html_e( 'RelatÃ³rios de afiliados', 'rc-affiliates' ); ?></h1>
 	<hr class="wp-header-end" />
 
 	<div id="poststuff" class="woocommerce-reports-wide">
@@ -67,7 +67,7 @@ global $wp_locale;
 					<?php
 					printf(
 						/* translators: 1: start date 2: end date */
-						esc_html__( 'From %1$s to %2$s', 'pb-affiliates' ),
+						esc_html__( 'From %1$s to %2$s', 'rc-affiliates' ),
 						esc_html( $pb_click_sr_start ),
 						esc_html( $pb_click_sr_end )
 					);
@@ -82,7 +82,7 @@ global $wp_locale;
 					<?php foreach ( $ranges as $range => $name ) : ?>
 						<?php
 						$range_args = array(
-							'page'  => 'pb-affiliates-report',
+							'page'  => 'rc-affiliates-report',
 							'range' => $range,
 						);
 						if ( $aff_id > 0 ) {
@@ -107,7 +107,7 @@ global $wp_locale;
 						</li>
 					<?php endforeach; ?>
 					<li class="custom <?php echo ( 'custom' === $current_range ) ? 'active' : ''; ?>">
-						<?php esc_html_e( 'Custom:', 'pb-affiliates' ); ?>
+						<?php esc_html_e( 'Custom:', 'rc-affiliates' ); ?>
 						<form method="get">
 							<div>
 								<?php
@@ -124,7 +124,7 @@ global $wp_locale;
 									}
 								}
 								?>
-								<input type="hidden" name="page" value="pb-affiliates-report" />
+								<input type="hidden" name="page" value="rc-affiliates-report" />
 								<input type="hidden" name="range" value="custom" />
 								<?php
 								$pb_click_form_start = isset( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : '';
@@ -133,7 +133,7 @@ global $wp_locale;
 								<input type="text" size="11" placeholder="yyyy-mm-dd" value="<?php echo esc_attr( $pb_click_form_start ); ?>" name="start_date" class="range_datepicker from" autocomplete="off" />
 								<span>&ndash;</span>
 								<input type="text" size="11" placeholder="yyyy-mm-dd" value="<?php echo esc_attr( $pb_click_form_end ); ?>" name="end_date" class="range_datepicker to" autocomplete="off" />
-								<button type="submit" class="button" value="<?php esc_attr_e( 'Go', 'pb-affiliates' ); ?>"><?php esc_html_e( 'Go', 'pb-affiliates' ); ?></button>
+								<button type="submit" class="button" value="<?php esc_attr_e( 'Go', 'rc-affiliates' ); ?>"><?php esc_html_e( 'Go', 'rc-affiliates' ); ?></button>
 								<?php wp_nonce_field( 'custom_range', 'wc_reports_nonce', false ); ?>
 							</div>
 						</form>
@@ -143,7 +143,7 @@ global $wp_locale;
 
 			<div class="inside" style="padding-top: 1em;">
 				<form method="get" class="pb-aff-click-report__filters">
-					<input type="hidden" name="page" value="pb-affiliates-report" />
+					<input type="hidden" name="page" value="rc-affiliates-report" />
 					<input type="hidden" name="range" value="<?php echo esc_attr( $current_range ); ?>" />
 					<?php if ( 'custom' === $current_range && ! empty( $_GET['start_date'] ) && ! empty( $_GET['end_date'] ) ) : ?>
 						<input type="hidden" name="start_date" value="<?php echo esc_attr( wc_clean( wp_unslash( $_GET['start_date'] ) ) ); ?>" />
@@ -151,9 +151,9 @@ global $wp_locale;
 						<?php wp_nonce_field( 'custom_range', 'wc_reports_nonce', false ); ?>
 					<?php endif; ?>
 
-					<label for="pb_affiliate"><?php esc_html_e( 'Afiliado', 'pb-affiliates' ); ?></label>
+					<label for="pb_affiliate"><?php esc_html_e( 'Afiliado', 'rc-affiliates' ); ?></label>
 					<select name="pb_affiliate" id="pb_affiliate">
-						<option value="0"><?php esc_html_e( 'Todos', 'pb-affiliates' ); ?></option>
+						<option value="0"><?php esc_html_e( 'Todos', 'rc-affiliates' ); ?></option>
 						<?php foreach ( $affiliates as $u ) : ?>
 							<option value="<?php echo (int) $u->ID; ?>" <?php selected( $aff_id, (int) $u->ID ); ?>>
 								<?php echo esc_html( $u->display_name . ' (#' . $u->ID . ')' ); ?>
@@ -161,9 +161,9 @@ global $wp_locale;
 						<?php endforeach; ?>
 					</select>
 
-					<label for="pb_order_status"><?php esc_html_e( 'Estado do pedido', 'pb-affiliates' ); ?></label>
+					<label for="pb_order_status"><?php esc_html_e( 'Estado do pedido', 'rc-affiliates' ); ?></label>
 					<select name="pb_order_status" id="pb_order_status">
-						<option value="" <?php selected( $pb_order_status, '' ); ?>><?php esc_html_e( 'Todos os status', 'pb-affiliates' ); ?></option>
+						<option value="" <?php selected( $pb_order_status, '' ); ?>><?php esc_html_e( 'Todos os status', 'rc-affiliates' ); ?></option>
 						<?php foreach ( $wc_order_status_choices as $st_slug => $st_label ) : ?>
 							<option value="<?php echo esc_attr( $st_slug ); ?>" <?php selected( $pb_order_status, $st_slug ); ?>>
 								<?php echo esc_html( $st_label ); ?>
@@ -180,38 +180,38 @@ global $wp_locale;
 					<input type="hidden" name="pb_ord_sort" value="<?php echo esc_attr( $ord_sort ); ?>" />
 					<input type="hidden" name="pb_ord_dir" value="<?php echo esc_attr( $ord_dir ); ?>" />
 
-					<button type="submit" class="button button-primary"><?php esc_html_e( 'Aplicar filtros', 'pb-affiliates' ); ?></button>
+					<button type="submit" class="button button-primary"><?php esc_html_e( 'Aplicar filtros', 'rc-affiliates' ); ?></button>
 				</form>
 
 				<p class="pb-aff-click-report__summary">
-					<strong><?php esc_html_e( 'Neste período:', 'pb-affiliates' ); ?></strong>
+					<strong><?php esc_html_e( 'Neste perÃ­odo:', 'rc-affiliates' ); ?></strong>
 					<?php
 					echo esc_html(
 						sprintf(
 							/* translators: 1: number of clicks 2: number of orders */
-							__( '%1$s cliques registrados · %2$s pedidos com código de afiliado', 'pb-affiliates' ),
+							__( '%1$s cliques registrados Â· %2$s pedidos com cÃ³digo de afiliado', 'rc-affiliates' ),
 							number_format_i18n( (int) $total_clicks ),
 							number_format_i18n( (int) $orders_in_range )
 						)
 					);
 					?>
-					<?php echo ' · '; ?>
-					<?php esc_html_e( 'Valor total dos pedidos:', 'pb-affiliates' ); ?>
+					<?php echo ' Â· '; ?>
+					<?php esc_html_e( 'Valor total dos pedidos:', 'rc-affiliates' ); ?>
 					<?php echo ' '; ?>
 					<?php echo wp_kses_post( wc_price( $orders_total_in_range ) ); ?>
-					<?php echo ' · '; ?>
-					<?php esc_html_e( 'Total de comissões:', 'pb-affiliates' ); ?>
+					<?php echo ' Â· '; ?>
+					<?php esc_html_e( 'Total de comissÃµes:', 'rc-affiliates' ); ?>
 					<?php echo ' '; ?>
 					<?php echo wp_kses_post( wc_price( $report_commission_total ) ); ?>
-					<?php echo ' · '; ?>
-					<?php esc_html_e( 'Comissões disponíveis (pendentes, repasse manual):', 'pb-affiliates' ); ?>
+					<?php echo ' Â· '; ?>
+					<?php esc_html_e( 'ComissÃµes disponÃ­veis (pendentes, repasse manual):', 'rc-affiliates' ); ?>
 					<?php echo ' '; ?>
 					<?php echo wp_kses_post( wc_price( $report_commission_available ) ); ?>
 				</p>
 
-				<h3 class="pb-aff-chart-heading"><?php esc_html_e( 'Evolução: cliques no link e pedidos atribuídos', 'pb-affiliates' ); ?></h3>
+				<h3 class="pb-aff-chart-heading"><?php esc_html_e( 'EvoluÃ§Ã£o: cliques no link e pedidos atribuÃ­dos', 'rc-affiliates' ); ?></h3>
 				<p class="description" style="margin-top:-0.25em">
-					<?php esc_html_e( 'A série "Cliques" usa apenas visitas registradas no log (URL, referer, etc.). "Pedidos" e "Valor dos pedidos" incluem qualquer atribuição ao programa (cupom com ID do afiliado ou cupom cujo código é igual ao código público do afiliado, cookie, referer). Os pedidos nas restantes secções respeitam o filtro "Estado do pedido" quando não está em "Todos os status".', 'pb-affiliates' ); ?>
+					<?php esc_html_e( 'A sÃ©rie "Cliques" usa apenas visitas registradas no log (URL, referer, etc.). "Pedidos" e "Valor dos pedidos" incluem qualquer atribuiÃ§Ã£o ao programa (cupom com ID do afiliado ou cupom cujo cÃ³digo Ã© igual ao cÃ³digo pÃºblico do afiliado, cookie, referer). Os pedidos nas restantes secÃ§Ãµes respeitam o filtro "Estado do pedido" quando nÃ£o estÃ¡ em "Todos os status".', 'rc-affiliates' ); ?>
 				</p>
 				<div class="chart-container">
 					<div class="chart-placeholder main pb-aff-click-line" style="height:360px;"></div>
@@ -219,43 +219,43 @@ global $wp_locale;
 
 				<div class="pb-aff-click-report__pies">
 					<div class="pb-aff-click-report__pie-col pb-aff-click-report__pie-col--via">
-						<h3 class="pb-aff-chart-heading pb-aff-chart-heading--spaced"><?php esc_html_e( 'Origem dos cliques', 'pb-affiliates' ); ?></h3>
+						<h3 class="pb-aff-chart-heading pb-aff-chart-heading--spaced"><?php esc_html_e( 'Origem dos cliques', 'rc-affiliates' ); ?></h3>
 						<details class="pb-aff-pie-help-details">
-							<summary class="pb-aff-pie-help-summary"><?php esc_html_e( 'Como a origem dos cliques é definida', 'pb-affiliates' ); ?></summary>
+							<summary class="pb-aff-pie-help-summary"><?php esc_html_e( 'Como a origem dos cliques Ã© definida', 'rc-affiliates' ); ?></summary>
 							<div class="description pb-aff-pie-help">
 								<p class="pb-aff-pie-help-intro">
-									<?php esc_html_e( 'A origem corresponde ao valor salvo quando o cookie de afiliado é definido:', 'pb-affiliates' ); ?>
+									<?php esc_html_e( 'A origem corresponde ao valor salvo quando o cookie de afiliado Ã© definido:', 'rc-affiliates' ); ?>
 								</p>
 								<ul class="pb-aff-pie-help-list">
 									<li>
-										<strong><?php esc_html_e( 'Parâmetro na URL', 'pb-affiliates' ); ?></strong>
+										<strong><?php esc_html_e( 'ParÃ¢metro na URL', 'rc-affiliates' ); ?></strong>
 										<?php
 										echo ' ';
-										esc_html_e( 'o cliente visitou a loja com o parâmetro de indicação na URL (por padrão ?pid=, configurável nas configurações do plugin).', 'pb-affiliates' );
+										esc_html_e( 'o cliente visitou a loja com o parÃ¢metro de indicaÃ§Ã£o na URL (por padrÃ£o ?pid=, configurÃ¡vel nas configuraÃ§Ãµes do plugin).', 'rc-affiliates' );
 										?>
 									</li>
 									<li>
-										<strong><?php esc_html_e( 'Domínio verificado (referer)', 'pb-affiliates' ); ?></strong>
+										<strong><?php esc_html_e( 'DomÃ­nio verificado (referer)', 'rc-affiliates' ); ?></strong>
 										<?php
 										echo ' ';
-										esc_html_e( 'o cliente veio de um site cujo domínio o afiliado validou na área Domínio de referência em Minha conta, e o navegador enviou o cabeçalho HTTP Referer.', 'pb-affiliates' );
+										esc_html_e( 'o cliente veio de um site cujo domÃ­nio o afiliado validou na Ã¡rea DomÃ­nio de referÃªncia em Minha conta, e o navegador enviou o cabeÃ§alho HTTP Referer.', 'rc-affiliates' );
 										?>
 									</li>
 								</ul>
 								<p class="pb-aff-pie-help-outro">
-									<?php esc_html_e( 'O afiliado não escolhe manualmente a origem; isso depende de como o visitante chega ao site.', 'pb-affiliates' ); ?>
+									<?php esc_html_e( 'O afiliado nÃ£o escolhe manualmente a origem; isso depende de como o visitante chega ao site.', 'rc-affiliates' ); ?>
 								</p>
 							</div>
 						</details>
 						<div class="chart-container" style="max-width:520px;">
 							<div class="chart-placeholder pb-aff-click-pie pie-chart" style="height:260px;"></div>
-							<ul class="pie-chart-legend pb-aff-pie-legend" id="pb-aff-pie-legend" aria-label="<?php esc_attr_e( 'Legenda: origem dos cliques com totais', 'pb-affiliates' ); ?>"></ul>
+							<ul class="pie-chart-legend pb-aff-pie-legend" id="pb-aff-pie-legend" aria-label="<?php esc_attr_e( 'Legenda: origem dos cliques com totais', 'rc-affiliates' ); ?>"></ul>
 						</div>
 					</div>
 					<div class="pb-aff-click-report__pie-col pb-aff-click-report__pie-col--domain">
 						<?php
 						$pb_ref_report_args = array(
-							'page'  => 'pb-affiliates-report',
+							'page'  => 'rc-affiliates-report',
 							'range' => $current_range,
 						);
 						if ( $aff_id > 0 ) {
@@ -284,9 +284,9 @@ global $wp_locale;
 						$pb_ref_switch_on       = ! empty( $hide_empty_referer );
 						?>
 						<div class="pb-aff-ref-domain-toolbar pb-aff-chart-heading--spaced">
-							<h3 class="pb-aff-chart-heading"><?php esc_html_e( 'Domínio do visitante (cliques × pedidos)', 'pb-affiliates' ); ?></h3>
+							<h3 class="pb-aff-chart-heading"><?php esc_html_e( 'DomÃ­nio do visitante (cliques Ã— pedidos)', 'rc-affiliates' ); ?></h3>
 							<div class="pb-aff-ref-hide-switch-wrap">
-								<span id="pb-aff-ref-hide-label" class="pb-aff-ref-hide-switch-label"><?php esc_html_e( 'Ocultar sem HTTP Referer', 'pb-affiliates' ); ?></span>
+								<span id="pb-aff-ref-hide-label" class="pb-aff-ref-hide-switch-label"><?php esc_html_e( 'Ocultar sem HTTP Referer', 'rc-affiliates' ); ?></span>
 								<a
 									href="<?php echo esc_url( $pb_ref_switch_href ); ?>"
 									class="pb-aff-ref-hide-switch<?php echo $pb_ref_switch_on ? ' is-on' : ''; ?>"
@@ -297,44 +297,44 @@ global $wp_locale;
 							</div>
 						</div>
 						<details class="pb-aff-pie-help-details">
-							<summary class="pb-aff-pie-help-summary"><?php esc_html_e( 'Como ler o gráfico e a tabela', 'pb-affiliates' ); ?></summary>
+							<summary class="pb-aff-pie-help-summary"><?php esc_html_e( 'Como ler o grÃ¡fico e a tabela', 'rc-affiliates' ); ?></summary>
 							<div class="description pb-aff-pie-help">
 								<p class="pb-aff-pie-help-intro">
-									<?php esc_html_e( 'Cada bolha é um domínio (host do HTTP Referer no log). Posição: quanto mais à direita, mais cliques no período; quanto mais acima, mais pedidos com esse host na meta do pedido. O tamanho da bolha combina os dois (maior = mais tráfego e/ou mais vendas).', 'pb-affiliates' ); ?>
+									<?php esc_html_e( 'Cada bolha Ã© um domÃ­nio (host do HTTP Referer no log). PosiÃ§Ã£o: quanto mais Ã  direita, mais cliques no perÃ­odo; quanto mais acima, mais pedidos com esse host na meta do pedido. O tamanho da bolha combina os dois (maior = mais trÃ¡fego e/ou mais vendas).', 'rc-affiliates' ); ?>
 								</p>
 								<ul class="pb-aff-pie-help-list">
 									<li>
-										<?php esc_html_e( 'Até 15 domínios com atividade no período (prioridade para quem tem mais pedidos; entram também sites com muitos cliques).', 'pb-affiliates' ); ?>
+										<?php esc_html_e( 'AtÃ© 15 domÃ­nios com atividade no perÃ­odo (prioridade para quem tem mais pedidos; entram tambÃ©m sites com muitos cliques).', 'rc-affiliates' ); ?>
 									</li>
 									<li>
-										<?php esc_html_e( 'À direita do gráfico, a tabela lista todos os domínios no período (com paginação), com taxa de conversão (pedidos ÷ cliques) e ordenação por coluna.', 'pb-affiliates' ); ?>
+										<?php esc_html_e( 'Ã€ direita do grÃ¡fico, a tabela lista todos os domÃ­nios no perÃ­odo (com paginaÃ§Ã£o), com taxa de conversÃ£o (pedidos Ã· cliques) e ordenaÃ§Ã£o por coluna.', 'rc-affiliates' ); ?>
 									</li>
 									<li>
-										<?php esc_html_e( 'Passe o rato sobre uma bolha para ver o domínio e os totais.', 'pb-affiliates' ); ?>
+										<?php esc_html_e( 'Passe o rato sobre uma bolha para ver o domÃ­nio e os totais.', 'rc-affiliates' ); ?>
 									</li>
 									<li>
-										<?php esc_html_e( 'Pedidos só gravam domínio quando o cookie (mesmo afiliado) traz referer_host; cupom de outro afiliado não copia o domínio do cookie.', 'pb-affiliates' ); ?>
+										<?php esc_html_e( 'Pedidos sÃ³ gravam domÃ­nio quando o cookie (mesmo afiliado) traz referer_host; cupom de outro afiliado nÃ£o copia o domÃ­nio do cookie.', 'rc-affiliates' ); ?>
 									</li>
 								</ul>
 							</div>
 						</details>
 						<?php if ( empty( $referer_domain_bubble_rows ) ) : ?>
-							<p class="description"><?php esc_html_e( 'Não há cliques nem pedidos com domínio de referência neste período (ou com o filtro de afiliado).', 'pb-affiliates' ); ?></p>
+							<p class="description"><?php esc_html_e( 'NÃ£o hÃ¡ cliques nem pedidos com domÃ­nio de referÃªncia neste perÃ­odo (ou com o filtro de afiliado).', 'rc-affiliates' ); ?></p>
 						<?php else : ?>
 							<p class="description" style="margin:0.35em 0 0">
-								<?php esc_html_e( 'Eixo X: cliques · Eixo Y: pedidos · Tamanho da bolha ~ volume total.', 'pb-affiliates' ); ?>
+								<?php esc_html_e( 'Eixo X: cliques Â· Eixo Y: pedidos Â· Tamanho da bolha ~ volume total.', 'rc-affiliates' ); ?>
 							</p>
 							<?php
 							$pb_ref_sort_link = static function ( $col ) use ( $pb_report_nav_base, $ref_sort, $ref_dir ) {
-								return PB_Affiliates_Admin_Click_Report::admin_referer_domain_sort_url( $pb_report_nav_base, $col, $ref_sort, $ref_dir );
+								return RC_Affiliates_Admin_Click_Report::admin_referer_domain_sort_url( $pb_report_nav_base, $col, $ref_sort, $ref_dir );
 							};
 							$pb_ref_sort_mark = static function ( $col ) use ( $ref_sort, $ref_dir ) {
 								if ( $col !== $ref_sort ) {
 									return '';
 								}
 								return 'desc' === $ref_dir
-									? ' <span class="sort-ind" aria-hidden="true">↓</span>'
-									: ' <span class="sort-ind" aria-hidden="true">↑</span>';
+									? ' <span class="sort-ind" aria-hidden="true">â†“</span>'
+									: ' <span class="sort-ind" aria-hidden="true">â†‘</span>';
 							};
 							$pb_ref_pag_url = remove_query_arg( 'pb_ref_paged', add_query_arg( $pb_report_nav_base, admin_url( 'admin.php' ) ) );
 							$pb_ref_pagination = '';
@@ -362,22 +362,22 @@ global $wp_locale;
 									<table class="widefat striped pb-aff-ref-domain-table">
 										<thead>
 											<tr>
-												<th scope="col"><?php esc_html_e( 'Domínio', 'pb-affiliates' ); ?></th>
+												<th scope="col"><?php esc_html_e( 'DomÃ­nio', 'rc-affiliates' ); ?></th>
 												<th scope="col" class="num sortable">
 													<a href="<?php echo esc_url( call_user_func( $pb_ref_sort_link, 'clicks' ) ); ?>">
-														<?php esc_html_e( 'Cliques', 'pb-affiliates' ); ?>
+														<?php esc_html_e( 'Cliques', 'rc-affiliates' ); ?>
 														<?php echo wp_kses_post( call_user_func( $pb_ref_sort_mark, 'clicks' ) ); ?>
 													</a>
 												</th>
 												<th scope="col" class="num sortable">
 													<a href="<?php echo esc_url( call_user_func( $pb_ref_sort_link, 'orders' ) ); ?>">
-														<?php esc_html_e( 'Pedidos', 'pb-affiliates' ); ?>
+														<?php esc_html_e( 'Pedidos', 'rc-affiliates' ); ?>
 														<?php echo wp_kses_post( call_user_func( $pb_ref_sort_mark, 'orders' ) ); ?>
 													</a>
 												</th>
 												<th scope="col" class="num sortable">
 													<a href="<?php echo esc_url( call_user_func( $pb_ref_sort_link, 'rate' ) ); ?>">
-														<?php esc_html_e( 'Conversão', 'pb-affiliates' ); ?>
+														<?php esc_html_e( 'ConversÃ£o', 'rc-affiliates' ); ?>
 														<?php echo wp_kses_post( call_user_func( $pb_ref_sort_mark, 'rate' ) ); ?>
 													</a>
 												</th>
@@ -386,7 +386,7 @@ global $wp_locale;
 										<tbody>
 											<?php if ( empty( $referer_domain_table_rows ) ) : ?>
 												<tr>
-													<td colspan="4"><?php esc_html_e( 'Nenhuma linha nesta página.', 'pb-affiliates' ); ?></td>
+													<td colspan="4"><?php esc_html_e( 'Nenhuma linha nesta pÃ¡gina.', 'rc-affiliates' ); ?></td>
 												</tr>
 											<?php else : ?>
 												<?php foreach ( $referer_domain_table_rows as $tr ) : ?>
@@ -397,7 +397,7 @@ global $wp_locale;
 														<td class="num">
 															<?php
 															if ( null === $tr['rate_pct'] ) {
-																echo esc_html( '—' );
+																echo esc_html( 'â€”' );
 															} else {
 																echo esc_html( wc_format_decimal( $tr['rate_pct'], 2 ) . '%' );
 															}
@@ -409,7 +409,7 @@ global $wp_locale;
 										</tbody>
 									</table>
 									<?php if ( $pb_ref_pagination ) : ?>
-										<nav class="pb-aff-ref-domain-pager" aria-label="<?php esc_attr_e( 'Paginação da lista de domínios', 'pb-affiliates' ); ?>">
+										<nav class="pb-aff-ref-domain-pager" aria-label="<?php esc_attr_e( 'PaginaÃ§Ã£o da lista de domÃ­nios', 'rc-affiliates' ); ?>">
 											<?php
 											// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- paginate_links returns safe HTML.
 											echo $pb_ref_pagination;
@@ -424,42 +424,42 @@ global $wp_locale;
 
 				<div class="pb-aff-bottom-tables-row">
 				<div class="pb-aff-affiliate-perf-section pb-aff-bottom-tables-row__col">
-					<h3 class="pb-aff-chart-heading pb-aff-chart-heading--spaced"><?php esc_html_e( 'Desempenho por afiliado', 'pb-affiliates' ); ?></h3>
+					<h3 class="pb-aff-chart-heading pb-aff-chart-heading--spaced"><?php esc_html_e( 'Desempenho por afiliado', 'rc-affiliates' ); ?></h3>
 					<details class="pb-aff-pie-help-details">
-						<summary class="pb-aff-pie-help-summary"><?php esc_html_e( 'Sobre esta tabela', 'pb-affiliates' ); ?></summary>
+						<summary class="pb-aff-pie-help-summary"><?php esc_html_e( 'Sobre esta tabela', 'rc-affiliates' ); ?></summary>
 						<div class="description pb-aff-pie-help">
 							<p class="pb-aff-pie-help-intro">
-								<?php esc_html_e( 'Cada linha é um afiliado (utilizador com programa ativo). Os cliques vêm do registo de visitas atribuídas a esse afiliado; os pedidos são encomendas com meta de atribuição ao mesmo ID no período.', 'pb-affiliates' ); ?>
+								<?php esc_html_e( 'Cada linha Ã© um afiliado (utilizador com programa ativo). Os cliques vÃªm do registo de visitas atribuÃ­das a esse afiliado; os pedidos sÃ£o encomendas com meta de atribuiÃ§Ã£o ao mesmo ID no perÃ­odo.', 'rc-affiliates' ); ?>
 							</p>
 							<ul class="pb-aff-pie-help-list">
 								<li>
-									<?php esc_html_e( 'A conversão é pedidos ÷ cliques; mostramos “—” quando não houve cliques registados no período.', 'pb-affiliates' ); ?>
+									<?php esc_html_e( 'A conversÃ£o Ã© pedidos Ã· cliques; mostramos â€œâ€”â€ quando nÃ£o houve cliques registados no perÃ­odo.', 'rc-affiliates' ); ?>
 								</li>
 								<li>
-									<?php esc_html_e( 'Respeita o mesmo intervalo de datas e o filtro “Afiliado” acima (um afiliado ou todos).', 'pb-affiliates' ); ?>
+									<?php esc_html_e( 'Respeita o mesmo intervalo de datas e o filtro â€œAfiliadoâ€ acima (um afiliado ou todos).', 'rc-affiliates' ); ?>
 								</li>
 							
-									<?php esc_html_e( 'Afiliados com cupom podem apresentar uma taxa de conversão maior.', 'pb-affiliates' ); ?>
+									<?php esc_html_e( 'Afiliados com cupom podem apresentar uma taxa de conversÃ£o maior.', 'rc-affiliates' ); ?>
 								</li>
 							</ul>
 						</div>
 					</details>
 					<?php if ( $affiliate_perf_table_total < 1 ) : ?>
 						<p class="description">
-							<?php esc_html_e( 'Não há cliques nem pedidos atribuídos a afiliados neste período (com os filtros atuais).', 'pb-affiliates' ); ?>
+							<?php esc_html_e( 'NÃ£o hÃ¡ cliques nem pedidos atribuÃ­dos a afiliados neste perÃ­odo (com os filtros atuais).', 'rc-affiliates' ); ?>
 						</p>
 					<?php else : ?>
 						<?php
 						$pb_aff_sort_link = static function ( $col ) use ( $pb_report_nav_base, $aff_sort, $aff_dir ) {
-							return PB_Affiliates_Admin_Click_Report::admin_report_sort_url( $pb_report_nav_base, $col, $aff_sort, $aff_dir, 'pb_aff' );
+							return RC_Affiliates_Admin_Click_Report::admin_report_sort_url( $pb_report_nav_base, $col, $aff_sort, $aff_dir, 'pb_aff' );
 						};
 						$pb_aff_sort_mark = static function ( $col ) use ( $aff_sort, $aff_dir ) {
 							if ( $col !== $aff_sort ) {
 								return '';
 							}
 							return 'desc' === $aff_dir
-								? ' <span class="sort-ind" aria-hidden="true">↓</span>'
-								: ' <span class="sort-ind" aria-hidden="true">↑</span>';
+								? ' <span class="sort-ind" aria-hidden="true">â†“</span>'
+								: ' <span class="sort-ind" aria-hidden="true">â†‘</span>';
 						};
 						$pb_aff_pag_url = remove_query_arg( 'pb_aff_paged', add_query_arg( $pb_report_nav_base, admin_url( 'admin.php' ) ) );
 						$pb_aff_pagination = '';
@@ -480,22 +480,22 @@ global $wp_locale;
 						<table class="widefat striped pb-aff-ref-domain-table" style="width:100%;margin-top:10px">
 							<thead>
 								<tr>
-									<th scope="col"><?php esc_html_e( 'Afiliado', 'pb-affiliates' ); ?></th>
+									<th scope="col"><?php esc_html_e( 'Afiliado', 'rc-affiliates' ); ?></th>
 									<th scope="col" class="num sortable">
 										<a href="<?php echo esc_url( call_user_func( $pb_aff_sort_link, 'clicks' ) ); ?>">
-											<?php esc_html_e( 'Cliques', 'pb-affiliates' ); ?>
+											<?php esc_html_e( 'Cliques', 'rc-affiliates' ); ?>
 											<?php echo wp_kses_post( call_user_func( $pb_aff_sort_mark, 'clicks' ) ); ?>
 										</a>
 									</th>
 									<th scope="col" class="num sortable">
 										<a href="<?php echo esc_url( call_user_func( $pb_aff_sort_link, 'orders' ) ); ?>">
-											<?php esc_html_e( 'Pedidos', 'pb-affiliates' ); ?>
+											<?php esc_html_e( 'Pedidos', 'rc-affiliates' ); ?>
 											<?php echo wp_kses_post( call_user_func( $pb_aff_sort_mark, 'orders' ) ); ?>
 										</a>
 									</th>
 									<th scope="col" class="num sortable">
 										<a href="<?php echo esc_url( call_user_func( $pb_aff_sort_link, 'rate' ) ); ?>">
-											<?php esc_html_e( 'Conversão', 'pb-affiliates' ); ?>
+											<?php esc_html_e( 'ConversÃ£o', 'rc-affiliates' ); ?>
 											<?php echo wp_kses_post( call_user_func( $pb_aff_sort_mark, 'rate' ) ); ?>
 										</a>
 									</th>
@@ -519,7 +519,7 @@ global $wp_locale;
 										<td class="num">
 											<?php
 											if ( null === $ar['rate_pct'] ) {
-												echo esc_html( '—' );
+												echo esc_html( 'â€”' );
 											} else {
 												echo esc_html( wc_format_decimal( $ar['rate_pct'], 2 ) . '%' );
 											}
@@ -530,7 +530,7 @@ global $wp_locale;
 							</tbody>
 						</table>
 						<?php if ( $pb_aff_pagination ) : ?>
-							<nav class="pb-aff-ref-domain-pager" aria-label="<?php esc_attr_e( 'Paginação: desempenho por afiliado', 'pb-affiliates' ); ?>">
+							<nav class="pb-aff-ref-domain-pager" aria-label="<?php esc_attr_e( 'PaginaÃ§Ã£o: desempenho por afiliado', 'rc-affiliates' ); ?>">
 								<?php
 								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- paginate_links returns safe HTML.
 								echo $pb_aff_pagination;
@@ -541,21 +541,21 @@ global $wp_locale;
 				</div>
 
 				<div class="pb-aff-period-orders-section pb-aff-bottom-tables-row__col">
-					<h3 class="pb-aff-chart-heading pb-aff-chart-heading--spaced"><?php esc_html_e( 'Pedidos de afiliados', 'pb-affiliates' ); ?></h3>
+					<h3 class="pb-aff-chart-heading pb-aff-chart-heading--spaced"><?php esc_html_e( 'Pedidos de afiliados', 'rc-affiliates' ); ?></h3>
 					<?php if ( $period_orders_total < 1 ) : ?>
-						<p class="description"><?php esc_html_e( 'Não há pedidos atribuídos a afiliados neste período (com os filtros atuais).', 'pb-affiliates' ); ?></p>
+						<p class="description"><?php esc_html_e( 'NÃ£o hÃ¡ pedidos atribuÃ­dos a afiliados neste perÃ­odo (com os filtros atuais).', 'rc-affiliates' ); ?></p>
 					<?php else : ?>
 						<?php
 						$pb_ord_sort_link = static function ( $col ) use ( $pb_report_nav_base, $ord_sort, $ord_dir ) {
-							return PB_Affiliates_Admin_Click_Report::admin_period_orders_sort_url( $pb_report_nav_base, $col, $ord_sort, $ord_dir );
+							return RC_Affiliates_Admin_Click_Report::admin_period_orders_sort_url( $pb_report_nav_base, $col, $ord_sort, $ord_dir );
 						};
 						$pb_ord_sort_mark = static function ( $col ) use ( $ord_sort, $ord_dir ) {
 							if ( $col !== $ord_sort ) {
 								return '';
 							}
 							return 'desc' === $ord_dir
-								? ' <span class="sort-ind" aria-hidden="true">↓</span>'
-								: ' <span class="sort-ind" aria-hidden="true">↑</span>';
+								? ' <span class="sort-ind" aria-hidden="true">â†“</span>'
+								: ' <span class="sort-ind" aria-hidden="true">â†‘</span>';
 						};
 						$pb_ord_pag_url    = remove_query_arg( 'pb_ord_paged', add_query_arg( $pb_report_nav_base, admin_url( 'admin.php' ) ) );
 						$pb_ord_pagination = '';
@@ -579,31 +579,31 @@ global $wp_locale;
 								<tr>
 									<th scope="col" class="sortable">
 										<a href="<?php echo esc_url( call_user_func( $pb_ord_sort_link, 'order_id' ) ); ?>">
-											<?php esc_html_e( 'Pedido', 'pb-affiliates' ); ?>
+											<?php esc_html_e( 'Pedido', 'rc-affiliates' ); ?>
 											<?php echo wp_kses_post( call_user_func( $pb_ord_sort_mark, 'order_id' ) ); ?>
 										</a>
 									</th>
 									<th scope="col" class="sortable">
 										<a href="<?php echo esc_url( call_user_func( $pb_ord_sort_link, 'date' ) ); ?>">
-											<?php esc_html_e( 'Data e hora', 'pb-affiliates' ); ?>
+											<?php esc_html_e( 'Data e hora', 'rc-affiliates' ); ?>
 											<?php echo wp_kses_post( call_user_func( $pb_ord_sort_mark, 'date' ) ); ?>
 										</a>
 									</th>
 									<th scope="col" class="sortable">
 										<a href="<?php echo esc_url( call_user_func( $pb_ord_sort_link, 'status' ) ); ?>">
-											<?php esc_html_e( 'Estado', 'pb-affiliates' ); ?>
+											<?php esc_html_e( 'Estado', 'rc-affiliates' ); ?>
 											<?php echo wp_kses_post( call_user_func( $pb_ord_sort_mark, 'status' ) ); ?>
 										</a>
 									</th>
 									<th scope="col" class="sortable">
 										<a href="<?php echo esc_url( call_user_func( $pb_ord_sort_link, 'affiliate' ) ); ?>">
-											<?php esc_html_e( 'Afiliado', 'pb-affiliates' ); ?>
+											<?php esc_html_e( 'Afiliado', 'rc-affiliates' ); ?>
 											<?php echo wp_kses_post( call_user_func( $pb_ord_sort_mark, 'affiliate' ) ); ?>
 										</a>
 									</th>
 									<th scope="col" class="num sortable">
 										<a href="<?php echo esc_url( call_user_func( $pb_ord_sort_link, 'commission' ) ); ?>">
-											<?php esc_html_e( 'Comissão', 'pb-affiliates' ); ?>
+											<?php esc_html_e( 'ComissÃ£o', 'rc-affiliates' ); ?>
 											<?php echo wp_kses_post( call_user_func( $pb_ord_sort_mark, 'commission' ) ); ?>
 										</a>
 									</th>
@@ -631,7 +631,7 @@ global $wp_locale;
 						</table>
 						</div>
 						<?php if ( $pb_ord_pagination ) : ?>
-							<nav class="pb-aff-ref-domain-pager" aria-label="<?php esc_attr_e( 'Paginação: pedidos de afiliados', 'pb-affiliates' ); ?>">
+							<nav class="pb-aff-ref-domain-pager" aria-label="<?php esc_attr_e( 'PaginaÃ§Ã£o: pedidos de afiliados', 'rc-affiliates' ); ?>">
 								<?php
 								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- paginate_links returns safe HTML.
 								echo $pb_ord_pagination;
@@ -648,8 +648,8 @@ global $wp_locale;
 					var order_data = JSON.parse( decodeURIComponent( '<?php echo rawurlencode( $chart_data_json ); ?>' ) );
 					var pie_series = JSON.parse( decodeURIComponent( '<?php echo rawurlencode( $pie_series_json ); ?>' ) );
 					var refererBubbleRows = JSON.parse( decodeURIComponent( '<?php echo rawurlencode( $referer_domain_bubble_series_json ); ?>' ) );
-					var bubbleAxisX = <?php echo wp_json_encode( __( 'Cliques', 'pb-affiliates' ) ); ?>;
-					var bubbleAxisY = <?php echo wp_json_encode( __( 'Pedidos', 'pb-affiliates' ) ); ?>;
+					var bubbleAxisX = <?php echo wp_json_encode( __( 'Cliques', 'rc-affiliates' ) ); ?>;
+					var bubbleAxisY = <?php echo wp_json_encode( __( 'Pedidos', 'rc-affiliates' ) ); ?>;
 					var orderMoney = JSON.parse( decodeURIComponent( '<?php echo rawurlencode( wp_json_encode( $order_chart_money ) ); ?>' ) );
 					var main_chart;
 
@@ -676,7 +676,7 @@ global $wp_locale;
 							jQuery('.chart-placeholder.pb-aff-click-line'),
 							[
 								{
-									label: <?php echo wp_json_encode( __( 'Cliques', 'pb-affiliates' ) ); ?>,
+									label: <?php echo wp_json_encode( __( 'Cliques', 'rc-affiliates' ) ); ?>,
 									data: order_data.clicks,
 									color: '#3498db',
 									points: { show: true, radius: 4, lineWidth: 2, fillColor: '#fff', fill: true },
@@ -687,7 +687,7 @@ global $wp_locale;
 									yaxis: 1
 								},
 								{
-									label: <?php echo wp_json_encode( __( 'Pedidos', 'pb-affiliates' ) ); ?>,
+									label: <?php echo wp_json_encode( __( 'Pedidos', 'rc-affiliates' ) ); ?>,
 									data: order_data.order_counts,
 									color: '#e67e22',
 									points: { show: true, radius: 3, lineWidth: 2, fillColor: '#fff', fill: true },
@@ -698,7 +698,7 @@ global $wp_locale;
 									yaxis: 1
 								},
 								{
-									label: <?php echo wp_json_encode( __( 'Valor dos pedidos', 'pb-affiliates' ) ); ?>,
+									label: <?php echo wp_json_encode( __( 'Valor dos pedidos', 'rc-affiliates' ) ); ?>,
 									data: order_data.order_totals,
 									color: '#27ae60',
 									points: { show: true, radius: 3, lineWidth: 2, fillColor: '#fff', fill: true },
@@ -888,3 +888,4 @@ global $wp_locale;
 	</div>
 </div>
 <?php // phpcs:enable WordPress.Security.NonceVerification.Recommended ?>
+

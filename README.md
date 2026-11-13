@@ -1,33 +1,33 @@
-# PB Afiliados
+﻿# rc affiliates
 ![Plugin de Afiliado 100% gratuito para WooCommerce](assets/banner-1544x500.png)
-Programa de afiliados para WooCommerce com integração PagBank Connect: links de indicação, comissões flexíveis, pagamentos manuais ou split automático, relatórios e dashboard para afiliados.
+Programa de afiliados para WooCommerce com integraÃ§Ã£o PagBank Connect: links de indicaÃ§Ã£o, comissÃµes flexÃ­veis, pagamentos manuais ou split automÃ¡tico, relatÃ³rios e dashboard para afiliados.
 
-## Visão geral
+## VisÃ£o geral
 
-O **PB Afiliados** foi criado para lojas que querem crescer com indicações sem planilhas e sem processos manuais complexos.  
-Você define as regras, e o plugin:
+O **rc affiliates** foi criado para lojas que querem crescer com indicaÃ§Ãµes sem planilhas e sem processos manuais complexos.  
+VocÃª define as regras, e o plugin:
 
 - rastreia cliques e atribui pedidos;
-- calcula comissões com regras de precedência;
-- oferece área do afiliado em **Minha conta**;
-- exibe materiais de apoio ao afiliado definidos por você;
-- entrega relatórios administrativos e operacionais.
+- calcula comissÃµes com regras de precedÃªncia;
+- oferece Ã¡rea do afiliado em **Minha conta**;
+- exibe materiais de apoio ao afiliado definidos por vocÃª;
+- entrega relatÃ³rios administrativos e operacionais.
 
 ### Como funciona
-1. Você instala e define as regras de comissão
-2. Novos afiliados aderem ao programa e começam a divulgar sua loja e seus produtos em seus sites, redes sociais e através de cupons especiais, levando tráfego para seu e-commerce
-3. Ao comprar em sua loja, a comissão é atribuída ao afiliado imediatamente de forma 100% automática
+1. VocÃª instala e define as regras de comissÃ£o
+2. Novos afiliados aderem ao programa e comeÃ§am a divulgar sua loja e seus produtos em seus sites, redes sociais e atravÃ©s de cupons especiais, levando trÃ¡fego para seu e-commerce
+3. Ao comprar em sua loja, a comissÃ£o Ã© atribuÃ­da ao afiliado imediatamente de forma 100% automÃ¡tica
 
-![Mais do que apenas comissões](assets/flow.svg)
+![Mais do que apenas comissÃµes](assets/flow.svg)
 
 ## Principais recursos
 
-- Integração com **PagBank Connect** (modo de pagamento manual ou split).
-- Comissão global ou específica, por categoria, por afiliado e por cupom.
-- Tipos de comissão: percentual ou valor fixo.
-- Link builder para afiliados gerarem URLs prontas para divulgação.
-- Materiais promocionais para download na área do afiliado.
-- Relatórios com cliques, pedidos e desempenho por afiliado.
+- IntegraÃ§Ã£o com **PagBank Connect** (modo de pagamento manual ou split).
+- ComissÃ£o global ou especÃ­fica, por categoria, por afiliado e por cupom.
+- Tipos de comissÃ£o: percentual ou valor fixo.
+- Link builder para afiliados gerarem URLs prontas para divulgaÃ§Ã£o.
+- Materiais promocionais para download na Ã¡rea do afiliado.
+- RelatÃ³rios com cliques, pedidos e desempenho por afiliado.
 - Fluxo de saque manual com registro de comprovante.
 - E-mails transacionais do programa (via WooCommerce).
 - Encurtador de URLs personalizadas
@@ -37,41 +37,41 @@ Você define as regras, e o plugin:
 - WordPress 6.2+
 - PHP 7.4+
 - WooCommerce ativo
-- PagBank Connect ativo com ao menos um método de pagamento disponível
+- PagBank Connect ativo com ao menos um mÃ©todo de pagamento disponÃ­vel
 - HPOS (High-Performance Order Storage) habilitado
 
-## Instalação
-1. Baixe o [.zip do plugin](https://github.com/r-martins/pb-affiliates/archive/refs/heads/master.zip).
+## InstalaÃ§Ã£o
+1. Baixe o [.zip do plugin](https://github.com/r-martins/rc-affiliates/archive/refs/heads/master.zip).
 2. No painel WordPress, clique em **Plugins** -> ** Adicionar Plugin** e depois em ** Enviar Plugin**.
 3. Envie o .zip que baixou no passo 1 e clique em **Instalar agora**.
-4. Ative o plugin e configure em **Afiliados -> Configurações**
+4. Ative o plugin e configure em **Afiliados -> ConfiguraÃ§Ãµes**
 
-## Configuração inicial recomendada
+## ConfiguraÃ§Ã£o inicial recomendada
 Para obter sucesso com seu programa de afiliados:
 
-1. Defina comissão padrão (tipo e valor).
-2. Configure duração de cookie e parâmetro de tracking.
+1. Defina comissÃ£o padrÃ£o (tipo e valor).
+2. Configure duraÃ§Ã£o de cookie e parÃ¢metro de tracking.
 3. Escolha modo de pagamento:
-   - manual (saques e marcação de pagamento manuais), ou
-   - split (repasse automático via PagBank Connect).
-4. (Opcional) Defina página de termos e política de cadastro de afiliados.
-5. Revise regras por categoria e por afiliado, se necessário.
-6. Crie materiais de apoio para seus afiliados (banners, ícones, logotipos, manual da marca, guias de divulgação) e suba eles em **Afiliados** -> **Materiais**.
-7. 🏆 Faça parcerias estratégicas com influenciadores através de cupons que dêem condições e comissões especiais e diferenciadas. Você pode definir regras de comissão na edição de cupom em **Marketing** -> **Cupons**.
+   - manual (saques e marcaÃ§Ã£o de pagamento manuais), ou
+   - split (repasse automÃ¡tico via PagBank Connect).
+4. (Opcional) Defina pÃ¡gina de termos e polÃ­tica de cadastro de afiliados.
+5. Revise regras por categoria e por afiliado, se necessÃ¡rio.
+6. Crie materiais de apoio para seus afiliados (banners, Ã­cones, logotipos, manual da marca, guias de divulgaÃ§Ã£o) e suba eles em **Afiliados** -> **Materiais**.
+7. ðŸ† FaÃ§a parcerias estratÃ©gicas com influenciadores atravÃ©s de cupons que dÃªem condiÃ§Ãµes e comissÃµes especiais e diferenciadas. VocÃª pode definir regras de comissÃ£o na ediÃ§Ã£o de cupom em **Marketing** -> **Cupons**.
 
-## Regras de comissão (resumo)
+## Regras de comissÃ£o (resumo)
 
-Ordem de precedência:
+Ordem de precedÃªncia:
 
-1. Regra de comissão definida no cupom de afiliado.
+1. Regra de comissÃ£o definida no cupom de afiliado.
 2. Regra personalizada no perfil do afiliado.
-3. Cálculo por linha de item usando regra de categoria (quando existir) ou padrão da loja.
+3. CÃ¡lculo por linha de item usando regra de categoria (quando existir) ou padrÃ£o da loja.
 
-Observações:
+ObservaÃ§Ãµes:
 
-- Em variações, a categoria considerada é a do produto pai.
-- Se múltiplas categorias tiverem regra, prevalece a de menor comissão monetária para a linha.
-- A comissão final é a soma das linhas.
+- Em variaÃ§Ãµes, a categoria considerada Ã© a do produto pai.
+- Se mÃºltiplas categorias tiverem regra, prevalece a de menor comissÃ£o monetÃ¡ria para a linha.
+- A comissÃ£o final Ã© a soma das linhas.
 
 ## Screenshots
 
@@ -82,9 +82,9 @@ Observações:
 </details>
 
 <details>
-  <summary><strong>2) Relatórios de desempenho</strong></summary>
+  <summary><strong>2) RelatÃ³rios de desempenho</strong></summary>
   <br>
-  <img src="assets/screenshot-2.png" alt="Relatórios de desempenho">
+  <img src="assets/screenshot-2.png" alt="RelatÃ³rios de desempenho">
 </details>
 
 <details>
@@ -94,39 +94,41 @@ Observações:
 </details>
 
 <details>
-  <summary><strong>4) Relatórios administrativos</strong></summary>
+  <summary><strong>4) RelatÃ³rios administrativos</strong></summary>
   <br>
-  <img src="assets/screenshot-4.png" alt="Relatórios administrativos">
+  <img src="assets/screenshot-4.png" alt="RelatÃ³rios administrativos">
 </details>
 
 <details>
-  <summary><strong>5) Configurações do plugin de afiliado</strong></summary>
+  <summary><strong>5) ConfiguraÃ§Ãµes do plugin de afiliado</strong></summary>
   <br>
-  <img src="assets/screenshot-5.png" alt="Configurações do plugin de afiliado">
+  <img src="assets/screenshot-5.png" alt="ConfiguraÃ§Ãµes do plugin de afiliado">
 </details>
 
 ## FAQ
 
 ### Posso usar sem PagBank Connect?
 
-Não. O plugin depende do ecossistema PagBank Connect, especialmente no modo de pagamento via Split.
+NÃ£o. O plugin depende do ecossistema PagBank Connect, especialmente no modo de pagamento via Split.
 <br>
 No caso de pagamento manual, ao menos um meio de pagamento PagBank Connect precisa estar ativo.
 
 ### Funciona com checkout legado (shortcode)?
 
-Sim para o programa de afiliados em geral (atribuição, comissões, admin e área do afiliado).  
-Recursos específicos de pagamento e disponibilidade dependem da configuração do WooCommerce/PagBank.
+Sim para o programa de afiliados em geral (atribuiÃ§Ã£o, comissÃµes, admin e Ã¡rea do afiliado).  
+Recursos especÃ­ficos de pagamento e disponibilidade dependem da configuraÃ§Ã£o do WooCommerce/PagBank.
 
 ### O afiliado precisa instalar algo?
 
-Não. Tudo funciona na própria loja, na conta do cliente/afiliado. No entanto, ele precisa ter uma conta PagBank para receber pagamentos via split.
+NÃ£o. Tudo funciona na prÃ³pria loja, na conta do cliente/afiliado. No entanto, ele precisa ter uma conta PagBank para receber pagamentos via split.
 
-## Documentação
+## DocumentaÃ§Ã£o
 
 - Central de ajuda: https://ajuda.pbintegracoes.com/hc/pt-br/sections/44721017341069-PB-Afiliados
 
-## Licença
+## LicenÃ§a
 
 GPL-3.0  
 https://www.gnu.org/licenses/gpl-3.0.html
+
+

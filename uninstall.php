@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 /**
- * Uninstall PB Afiliados.
+ * Uninstall rc affiliates.
  *
- * @package PB_Affiliates
+ * @package RC_Affiliates
  */
 
 defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
@@ -13,5 +13,7 @@ $wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}pagbank_affiliate_commissions
 $wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}pagbank_affiliate_withdrawals" );
 $wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}pagbank_affiliate_click_log" );
 
-delete_option( 'pb_affiliates_settings' );
-delete_option( 'pb_affiliates_db_version' );
+delete_option( 'RC_Affiliates_settings' );
+delete_option( 'RC_Affiliates_db_version' );
+
+

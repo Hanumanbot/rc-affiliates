@@ -1,7 +1,7 @@
-/**
- * PB Afiliados — admin settings.
+﻿/**
+ * rc affiliates â€” admin settings.
  *
- * Não use a classe `woocommerce` no wrapper: o admin.css do WC aplica
+ * NÃ£o use a classe `woocommerce` no wrapper: o admin.css do WC aplica
  * table-layout fixo e larguras grandes em .woocommerce table.form-table.
  */
 .pb-aff-admin-settings {
@@ -119,3 +119,4 @@
 .pb-aff-row-hidden {
 	display: none !important;
 }
+

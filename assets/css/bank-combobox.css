@@ -1,4 +1,4 @@
-/* <ul> não pode ficar dentro de <p> — o markup usa <div> para o row (ver PB_Affiliates_Bank_Combo). */
+﻿/* <ul> nÃ£o pode ficar dentro de <p> â€” o markup usa <div> para o row (ver RC_Affiliates_Bank_Combo). */
 .pb-aff-bank-form-row,
 .pb-aff-bank-admin-row {
 	overflow: visible;
@@ -91,7 +91,7 @@ body.profile-php .pb-aff-bank-dropdown,
 	color: #b32d2e;
 }
 
-/* Combobox de afiliado no cupom — alinha com p.form-field (o core WC só define padding para <p>). */
+/* Combobox de afiliado no cupom â€” alinha com p.form-field (o core WC sÃ³ define padding para <p>). */
 #woocommerce-coupon-data .woocommerce_options_panel .form-field._pb_affiliate_id_field,
 .post-type-shop_coupon .woocommerce_options_panel .form-field._pb_affiliate_id_field {
 	padding: 5px 20px 5px 162px !important;
@@ -136,3 +136,4 @@ body.profile-php .pb-aff-bank-dropdown,
 		width: 100%;
 	}
 }
+

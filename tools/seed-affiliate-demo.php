@@ -1,20 +1,20 @@
-#!/usr/bin/env php
+﻿#!/usr/bin/env php
 <?php
 // phpcs:ignoreFile -- CLI development utility; excluded from distribution ZIP (.distignore).
 
 /**
- * Popula dados de demonstração: cliques (`pagbank_affiliate_click_log`) e pedidos WooCommerce
- * com meta `_pb_affiliate_id` / `_pb_affiliate_code` para códigos indicados.
+ * Popula dados de demonstraÃ§Ã£o: cliques (`pagbank_affiliate_click_log`) e pedidos WooCommerce
+ * com meta `_pb_affiliate_id` / `_pb_affiliate_code` para cÃ³digos indicados.
  *
  * Uso (raiz WordPress, ex.: pasta `woocommerce/`):
  *
- *   php wp-content/plugins/pb-affiliates/tools/seed-affiliate-demo.php
+ *   php wp-content/plugins/rc-affiliates/tools/seed-affiliate-demo.php
  *
- * Docker (ajuste serviço/caminho):
+ * Docker (ajuste serviÃ§o/caminho):
  *
- *   docker compose exec php php /var/www/html/wp-content/plugins/pb-affiliates/tools/seed-affiliate-demo.php
+ *   docker compose exec php php /var/www/html/wp-content/plugins/rc-affiliates/tools/seed-affiliate-demo.php
  *
- * @package PB_Affiliates
+ * @package RC_Affiliates
  */
 
 if ( php_sapi_name() !== 'cli' ) {
@@ -24,7 +24,7 @@ if ( php_sapi_name() !== 'cli' ) {
 
 $wp_root = dirname( __DIR__, 4 );
 if ( ! is_readable( $wp_root . '/wp-load.php' ) ) {
-	fwrite( STDERR, "wp-load.php não encontrado em: {$wp_root}\n" );
+	fwrite( STDERR, "wp-load.php nÃ£o encontrado em: {$wp_root}\n" );
 	exit( 1 );
 }
 
@@ -35,12 +35,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $pb_ref_param = 'pid';
-if ( class_exists( 'PB_Affiliates_Settings' ) ) {
-	$pb_ref_param = sanitize_key( PB_Affiliates_Settings::get()['referral_param'] ?? 'pid' );
+if ( class_exists( 'RC_Affiliates_Settings' ) ) {
+	$pb_ref_param = sanitize_key( RC_Affiliates_Settings::get()['referral_param'] ?? 'pid' );
 }
 
 if ( ! function_exists( 'wc_create_order' ) ) {
-	fwrite( STDERR, "WooCommerce não está ativo.\n" );
+	fwrite( STDERR, "WooCommerce nÃ£o estÃ¡ ativo.\n" );
 	exit( 1 );
 }
 
@@ -51,16 +51,16 @@ $codes_config = array(
 	'pbseed_maria' => array( 'clicks' => 48, 'orders' => 10 ),
 );
 
-// Só valores que o tracking do plugin define (parâmetro URL ou domínio verificado).
+// SÃ³ valores que o tracking do plugin define (parÃ¢metro URL ou domÃ­nio verificado).
 $via_pool  = array( 'cookie_param', 'referrer' );
 $fake_ips  = array( '177.12.34.10', '187.45.20.111', '45.160.90.2', '2001:db8::1', '10.0.0.22' );
 $path_pool = array( '/', '/loja/', '/product/exemplo/', '/categoria/produtos/' );
 
 /**
- * Resolve user ID pelo código pb_affiliate_code.
+ * Resolve user ID pelo cÃ³digo pb_affiliate_code.
  *
- * @param string $code Código.
- * @return int 0 se não existir.
+ * @param string $code CÃ³digo.
+ * @return int 0 se nÃ£o existir.
  */
 $resolve_affiliate_user = static function ( $code ) {
 	global $wpdb;
@@ -79,7 +79,7 @@ $resolve_affiliate_user = static function ( $code ) {
 };
 
 /**
- * Primeiro produto publicado com preço > 0, senão qualquer simples.
+ * Primeiro produto publicado com preÃ§o > 0, senÃ£o qualquer simples.
  *
  * @return int Product ID ou 0.
  */
@@ -105,13 +105,13 @@ $find_product_id = static function () {
 $product_id = $find_product_id();
 
 /**
- * Cria pedido com atribuição ao afiliado.
+ * Cria pedido com atribuiÃ§Ã£o ao afiliado.
  *
  * @param int    $aff_id      User ID.
- * @param string $aff_code    Código.
+ * @param string $aff_code    CÃ³digo.
  * @param int    $created_ts  Unix timestamp.
  * @param string $status      Estad WC.
- * @param int    $product_id  Produto ou 0 (taxa única).
+ * @param int    $product_id  Produto ou 0 (taxa Ãºnica).
  * @return int Order ID ou 0.
  */
 $create_order = static function ( $aff_id, $aff_code, $created_ts, $status, $product_id ) use ( $via_pool ) {
@@ -172,13 +172,13 @@ $statuses         = array( 'pending', 'processing', 'on-hold', 'completed' );
 foreach ( $codes_config as $code => $cfg ) {
 	$uid = $resolve_affiliate_user( $code );
 	if ( ! $uid ) {
-		fwrite( STDERR, "Ignorado: não existe usuário com pb_affiliate_code = {$code}\n" );
+		fwrite( STDERR, "Ignorado: nÃ£o existe usuÃ¡rio com pb_affiliate_code = {$code}\n" );
 		continue;
 	}
 
 	$st = get_user_meta( $uid, 'pb_affiliate_status', true );
 	if ( 'active' !== (string) $st ) {
-		fwrite( STDERR, "Aviso: usuário #{$uid} ({$code}) não está com estado 'active' (atual: " . ( $st !== '' ? $st : '(vazio)' ) . "). Relatórios podem bloquear a visualização.\n" );
+		fwrite( STDERR, "Aviso: usuÃ¡rio #{$uid} ({$code}) nÃ£o estÃ¡ com estado 'active' (atual: " . ( $st !== '' ? $st : '(vazio)' ) . "). RelatÃ³rios podem bloquear a visualizaÃ§Ã£o.\n" );
 	}
 
 	$n_clicks = (int) $cfg['clicks'];
@@ -229,8 +229,9 @@ foreach ( $codes_config as $code => $cfg ) {
 		}
 	}
 
-	echo "Seed concluído para {$code} (user #{$uid}): {$n_clicks} cliques inseridos, até {$n_orders} pedidos tentados.\n";
+	echo "Seed concluÃ­do para {$code} (user #{$uid}): {$n_clicks} cliques inseridos, atÃ© {$n_orders} pedidos tentados.\n";
 }
 
 echo "\nResumo: {$inserted_clicks} linhas de clique, {$inserted_orders} pedidos criados.\n";
 exit( 0 );
+
